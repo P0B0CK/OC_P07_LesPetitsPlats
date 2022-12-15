@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="css/sass/style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="assets/img/lppLogo.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Les Petits Plats</title>
 </head>
 <body>
-    <header>
-        <img src="img/lppLogo.png" alt="Logo de Les Petits Plats"/>
-        <h1>Les petits plats</h1>
+    <header id="banner">
+        <img src="assets/img/lppLogo.png" alt="Logo de Les Petits Plats"/>
+        <h1 class="logo">Les petits plats</h1>
     </header>
     <main>
         <section id="search">
-            <input id="searchbar" type="text" placeholder="Rechercher une recette"></input>
-            <img src="unknow.png"/>
+            <div class="search-content">
+                <input class="searchbar" type="text" placeholder="Rechercher une recette"></input>
+                <img src="assets/img/search-glass.svg" class="searchbar-img"/>
+            </div>
         </section>
 
         <section id="searchtag">
-            <span class="tag-selected"></span>
+            <span class="tag-selected">
+                <div class="tag"><p>Tag</p><img src="assets/img/tag-close.svg" alt="delete tag"></div>
+            </span>
             <div class="tag-selectors">
                 <select name="Ingrédients" id="ing-select">
                     <option value="">Ingrédients</option>
@@ -37,16 +45,83 @@
                 <div class="card-picture"></div>
                 <div class="card-details">
                     <div class="details-legend">
-                        <h3 class="recipe-title"></h3>
-                        <div class="recipe-duration"></div>
+                        <h3 class="recipe-title">Mon titre h3 ici</h3>
+                        <div class="recipe-duration"><img src="assets/img/icon-time.svg" alt="Icone Temps de préparation"><p>60 min</p></div>
                     </div>
                     <div class="details-description">
-                        <div class="recipe-necessary"></div>
-                        <div class="recipe-describe"></div>
+                        <div class="recipe-necessary"><p>ingrédient 1: dosage</p></div>
+                        <div class="recipe-describe"><p>Description de la recette : </p></div>
+                    </div>
+                </div>
+            </article>
+            <article class="recipe-card">
+                <div class="card-picture"></div>
+                <div class="card-details">
+                    <div class="details-legend">
+                        <h3 class="recipe-title">Mon titre h3 ici</h3>
+                        <div class="recipe-duration"><img src="assets/img/icon-time.svg" alt="Icone Temps de préparation"><p>60 min</p></div>
+                    </div>
+                    <div class="details-description">
+                        <div class="recipe-necessary"><p>ingrédient 1: dosage</p></div>
+                        <div class="recipe-describe"><p>Description de la recette : </p></div>
+                    </div>
+                </div>
+            </article>
+            <article class="recipe-card">
+                <div class="card-picture"></div>
+                <div class="card-details">
+                    <div class="details-legend">
+                        <h3 class="recipe-title">Mon titre h3 ici</h3>
+                        <div class="recipe-duration"><img src="assets/img/icon-time.svg" alt="Icone Temps de préparation"><p>60 min</p></div>
+                    </div>
+                    <div class="details-description">
+                        <div class="recipe-necessary"><p>ingrédient 1: dosage</p></div>
+                        <div class="recipe-describe"><p>Description de la recette : </p></div>
+                    </div>
+                </div>
+            </article>
+            <article class="recipe-card">
+                <div class="card-picture"></div>
+                <div class="card-details">
+                    <div class="details-legend">
+                        <h3 class="recipe-title">Mon titre h3 ici</h3>
+                        <div class="recipe-duration"><img src="assets/img/icon-time.svg" alt="Icone Temps de préparation"><p>60 min</p></div>
+                    </div>
+                    <div class="details-description">
+                        <div class="recipe-necessary"><p>ingrédient 1: dosage</p></div>
+                        <div class="recipe-describe"><p>Description de la recette : </p></div>
+                    </div>
+                </div>
+            </article>
+            <article class="recipe-card">
+                <div class="card-picture"></div>
+                <div class="card-details">
+                    <div class="details-legend">
+                        <h3 class="recipe-title">Mon titre h3 ici</h3>
+                        <div class="recipe-duration"><img src="assets/img/icon-time.svg" alt="Icone Temps de préparation"><p>60 min</p></div>
+                    </div>
+                    <div class="details-description">
+                        <div class="recipe-necessary"><p>ingrédient 1: dosage</p></div>
+                        <div class="recipe-describe"><p>Description de la recette : </p></div>
+                    </div>
+                </div>
+            </article>
+            <article class="recipe-card">
+                <div class="card-picture"></div>
+                <div class="card-details">
+                    <div class="details-legend">
+                        <h3 class="recipe-title">Mon titre h3 ici</h3>
+                        <div class="recipe-duration"><img src="assets/img/icon-time.svg" alt="Icone Temps de préparation"><p>60 min</p></div>
+                    </div>
+                    <div class="details-description">
+                        <div class="recipe-necessary"><p>ingrédient 1: dosage</p></div>
+                        <div class="recipe-describe"><p>Description de la recette : </p></div>
                     </div>
                 </div>
             </article>
         </section>
-    </main>    
+    </main>
+
+    <script src="scripts/utils/api.js" type="module"></script>
 </body>
 </html>
