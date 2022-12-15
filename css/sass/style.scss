@@ -17,8 +17,9 @@ body {
     margin-top: 17px; margin-bottom: 17px;
 }
 
-main {
-    width: 90%;
+main, header{
+    max-width: 1240px;
+    min-width: auto;
     justify-content: center;
 }
 
@@ -38,6 +39,11 @@ h1.logo {
 
 p {
     margin: 0;
+}
+
+input {
+    margin: 0;
+    padding: 0;
 }
 
 #searchbar{
@@ -97,6 +103,11 @@ select {
 }
 
 .tag-selectors {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
     margin-top: 15px;
 }
 
