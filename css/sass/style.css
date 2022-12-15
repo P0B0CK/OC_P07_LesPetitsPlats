@@ -44,6 +44,9 @@ input {
   margin: 0;
   padding: 0;
 }
+input:focus-visible {
+  display: none;
+}
 
 #searchbar {
   display: flex;
