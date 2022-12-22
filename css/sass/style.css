@@ -177,12 +177,16 @@ h3 {
 
 .recipe-duration {
   display: flex;
+  flex-flow: row nowrap;
   align-items: center;
   gap: 7px;
   font-family: "Lato", "Roboto", sans-serif;
   font-size: 18px;
   font-weight: 700;
   line-height: 21.6px;
+}
+.recipe-duration p {
+  flex-flow: row nowrap;
 }
 
 .details-description {
