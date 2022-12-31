@@ -1,5 +1,6 @@
 import { recipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
+import { getRecipesTags } from "../factories/recipeTag.js";
 
 // console.log(recipes);
 
@@ -10,6 +11,7 @@ function getRecipes() {
 
 function init() {
     getRecipes();
+    getRecipesTags();
 }
 
 init()

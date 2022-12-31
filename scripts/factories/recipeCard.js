@@ -28,18 +28,18 @@ export function recipeCard(recipes) {
     function recipeIngredient(elt){
         let datas = ``;
         if(elt.unit && elt.quantity) {
-            datas = `<li>${elt.ingredient} : ${elt.quantity} ${elt.unit}</li>`;
+            datas = `<li><strong>${elt.ingredient} :</strong> ${elt.quantity} ${elt.unit}</li>`;
         } else if (elt.quantity &&  !elt.unit) {
-            datas = `<li>${elt.ingredient} : ${elt.quantity}</li>`;
+            datas = `<li><strong>${elt.ingredient} :</strong> ${elt.quantity}</li>`;
         } else {
-            datas = `<li>${elt.ingredient}</li>`;
+            datas = `<li><strong>${elt.ingredient}</strong></li>`;
         }
         return datas;
     }
 
     function createIngredientType() {
         let tabIngredient = [];
-        ingredients.map( elt => tabIngredient.push(elt.ingredient)) 
+        ingredients.map( elt => tabIngredient.push(elt.ingredient));
     }
 }
 

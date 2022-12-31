@@ -12,36 +12,36 @@
 </head>
 <body>
     <header id="banner">
-        <img src="assets/img/lppLogo.png" alt="Logo"/>
-        <img src="assets/img/LesPetitsPlats.svg" alt="Les Petits Plats"/>
+        <img src="assets/img/lppLogo.png" alt="Logo">
+        <img src="assets/img/LesPetitsPlats.svg" alt="Les Petits Plats">
     </header>
     <main>
-        <section id="search">
+        <div id="search">
             <div class="search-content">
                 <input class="searchbar" type="text" placeholder="Rechercher une recette">
-                <img src="assets/img/search-glass.svg" class="searchbar-img"/>
+                <img src="assets/img/search-glass.svg" class="searchbar-img" alt="icone de recherche">
             </div>
-        </section>
+        </div>
 
-        <section id="searchtag">
-            <span class="tag-selected">
+        <div id="searchtag">
+            <div class="tag-selected">
                 <div class="tag"><p>Tag</p><img src="assets/img/tag-close.svg" alt="delete tag"></div>
-            </span>
+            </div>
             <div class="tag-selectors">
                 <select name="Ingrédients" id="ing-select">
-                    <option value="">Ingrédients</option>
+                    <option value="0">Ingrédients</option>
                 </select>
                 <select name="Appareils" id="app-select">
-                    <option value="">Appareils</option>
+                    <option value="0">Appareils</option>
                 </select>
                 <select name="Ustensiles" id="ust-select">
-                    <option value="">Ustensiles</option>
+                    <option value="0">Ustensiles</option>
                 </select>
             </div>
-        </section>
+        </div>
 
-        <section id="searchresults">
-        </section>
+        <div id="searchresults">
+        </div>
     </main>
 
     <script src="scripts/pages/main.js" type="module"></script>
