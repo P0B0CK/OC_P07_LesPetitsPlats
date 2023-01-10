@@ -1,12 +1,13 @@
 import { recipes } from "../../datas/recipes.js";
 
-// section de recherche par tag ::
+//// >>> DOM ELEMENTS <<< ////
 const searchtag = document.querySelector('#searchtag');
+const tagsSelectors = document.querySelector('.tag-selectors');
 
 /**
  * 
  * @param {datas tags array} recipes
- * @returns 
+ * @returns array content datas from tags
  */
 
 export function getRecipesTags(recipes) {
@@ -49,31 +50,49 @@ export function getRecipesTags(recipes) {
  * @param {object btn tags selectors} tabTag
  */
 
-export function TagsSelectors(tabTag) {
+export function getSelectorsTags(tabTag) {
+        // FONCTION SINGULIERE
+    // parent
+    const btnSelect = document.createElement('div');
+        btnSelect.setAttribute('class', 'btn-select');
+        // enfants
+        const btnContent = document.createElement('div');
+            btnContent.setAttribute('class', 'btn-content');
 
-    // Compartiment de la section de Searchtag contenant les sélecteurs ::
-    const tagsSelectors = document.createElement('div');
-        tagsSelectors.setAttribute('class', 'tag-selectors');
+        const btnArrow = document.createElement('div');
+            btnArrow.setAttribute('class', 'btn-arrow');
+    
+    btnSelect.appendChild(btnContent);
+    btnSelect.appendChild(btnArrow);
 
-    // Selecteur par Ingredient :
-    const btnSelectorByIng = document.createElement('div');
-        btnSelector.setAttribute('id', 'ing-select');
-        btnSelector.setAttribute('class', 'btn-select');
-
-    // Selecteur par Appareil :
-    const btnSelectorByApp = document.createElement('div');
-        btnSelector.setAttribute('id', 'app-select');
-        btnSelector.setAttribute('class', 'btn-select');
-
-    // Selecteur par Ustensil :
-    const btnSelectorByUst = document.createElement('div');
-        btnSelector.setAttribute('id', 'ust-select');
-        btnSelector.setAttribute('class', 'btn-select');
-
-    // option.innerHTML = `${datasTags.applianceTag}`;
-    // option.innerHTML = `${datasTags.ingredientsTag}`;
-    // option.innerHTML = `${datasTags.ustensilsTag}`;
+    return btnSelect;
 };
+
+        // FONCTION PLURIEL
+    // // Selecteur par Ingredient :
+    // const btnSelectorByIng = document.createElement('div');
+    //     btnSelectorByIng.setAttribute('id', 'ing-select');
+    //     btnSelectorByIng.setAttribute('class', 'btn-select');
+
+    // // Selecteur par Appareil :
+    // const btnSelectorByApp = document.createElement('div');
+    //     btnSelectorByApp.setAttribute('id', 'app-select');
+    //     btnSelectorByApp.setAttribute('class', 'btn-select');
+
+    // // Selecteur par Ustensil :
+    // const btnSelectorByUst = document.createElement('div');
+    //     btnSelectorByUst.setAttribute('id', 'ust-select');
+    //     btnSelectorByUst.setAttribute('class', 'btn-select');
+
+    // tagsSelectors.appendChild(btnSelectorByIng);
+    // tagsSelectors.appendChild(btnSelectorByApp);
+    // tagsSelectors.appendChild(btnSelectorByUst);
+
+    // searchtag.appendChild(tagsSelectors);
+
+    // console.log(tabTag.ingredientsTag);
+    // console.log(tabTag.applianceTag);
+    // console.log(tabTag.ustensilsTag);
 
 // /**
 //  * 

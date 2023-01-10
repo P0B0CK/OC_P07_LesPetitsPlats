@@ -79,6 +79,7 @@ input {
 
 
 .btn-select {
+    background-color: #C7BEBE;
     display: flex;
     flex-flow: row nowrap;
 
@@ -134,16 +135,16 @@ input {
     }
 }
 
-.btn-content {
-    width: 667px;
-    height: 397px;
-    background-color: #3282F7;
+// .btn-content {
+//     width: 667px;
+//     height: 397px;
+//     background-color: #3282F7;
 
-    position: absolute;
-    top: 69px;
+//     position: absolute;
+//     top: 69px;
 
-    border-radius: 0 0 5px 5px;
-}
+//     border-radius: 0 0 5px 5px;
+// }
 
 .search-text {
     font-family: "Lato", "Roboto", sans-serif;
