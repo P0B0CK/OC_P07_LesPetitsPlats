@@ -9,11 +9,10 @@ import { getRecipesTags, getSelectorsTags } from "../factories/datasTags.js";
  */
 const searchtag = document.querySelector('#searchtag');
 const tagsSelectors = document.querySelector('.tag-selectors');
-const btnSelectDOM = document.querySelectorAll('.btn-select');
 
 /**
  * NEW TAG'S LIST ARRAY
- */
+*/
 let tabTag = getRecipesTags(recipes);
 
 function handleRecipes() {
@@ -22,23 +21,28 @@ function handleRecipes() {
 }
 
 function handleSelector() {
+    const tabName = Object.keys(tabTag);
     
-    Object.keys(tabTag).forEach(key => {
-        tagsSelectors.appendChild(new getSelectorsTags(key));
-
-        console.log(key);
-
-        // for (let i = 0 ; i <= key.length ; i++) {}
-        // getSelectorsTags(key)
-        //  if ( getSelectorsTags(key) === key[0]) {
-        //     btnSelectDOM.setAttribute('id', 'ing-select');
-        // } if ( key == key[1]) {
-        //     btnSelect.setAttribute('id', 'app-select');
-        // } if ( key == key[2]) {
-        //     btnSelect.setAttribute('id', 'ust-select');
-        // }
-    });
-    console.log(Object.keys(tabTag));
+    tabName.forEach(key => { tagsSelectors.appendChild(new getSelectorsTags(key));});
+                        
+                        // console.log(tabName); // tableau des clés
+                        // console.log(tabName.length); // 3
+                        
+    const btnSelectDOM = document.querySelectorAll('.btn-select');
+    // console.log(btnSelectDOM);
+    
+    for (let i = 0 ; i < btnSelectDOM.length ; i++) {
+        // console.log(i);
+        if ( i == 0) {
+            btnSelectDOM[i].setAttribute('id', 'ing-select');
+        } if ( i == 1) {
+        btnSelectDOM[i].setAttribute('id', 'app-select');
+        } if ( i == 2) {
+            btnSelectDOM[i].setAttribute('id', 'ust-select');
+        }
+    };
+    // console.log(tagsSelectors)
+    // console.log(Object.keys(tabTag));
 };
 
 function init() {

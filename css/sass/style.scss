@@ -101,6 +101,7 @@ input {
     cursor: pointer;
     &:hover {
         width: 667px;
+        justify-content: space-between;
         border-radius: 5px 5px 0 0;
     }
     &#ing-select{
@@ -117,6 +118,10 @@ input {
         background-color: #ED6454;
         border-color: #ED6454;
     }
+}
+
+.btn-title {
+    padding: 22px;
 }
 
 .btn-name {

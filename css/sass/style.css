@@ -108,6 +108,7 @@ input:focus-visible {
 }
 .btn-select:hover {
   width: 667px;
+  justify-content: space-between;
   border-radius: 5px 5px 0 0;
 }
 .btn-select#ing-select {
@@ -121,6 +122,10 @@ input:focus-visible {
 .btn-select#ust-select {
   background-color: #ED6454;
   border-color: #ED6454;
+}
+
+.btn-title {
+  padding: 22px;
 }
 
 .btn-name {
