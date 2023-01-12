@@ -49,6 +49,10 @@ input {
     }
 }
 
+.hide {
+    display: none;
+}
+
 #searchbar{
     display: flex;
     flex-flow: row nowrap;
@@ -79,12 +83,8 @@ input {
 
 
 .btn-select {
-    background-color: #C7BEBE;
     display: flex;
-    flex-flow: row nowrap;
-
-    justify-content: space-between;
-    align-items: center;
+    flex-flow: column nowrap;
 
     position: relative;
 
@@ -100,9 +100,12 @@ input {
     line-height: 21.6px;
     cursor: pointer;
     &:hover {
+        
+    }
+    &:active {
         width: 667px;
         justify-content: space-between;
-        border-radius: 5px 5px 0 0;
+        border-radius: 5px;
     }
     &#ing-select{
         background-color: #3282F7;
@@ -120,8 +123,26 @@ input {
     }
 }
 
-.btn-title {
-    padding: 22px;
+.btn-content {
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 0 20px 20px;
+}
+
+.btn-search {
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 0 20px 20px;
 }
 
 .btn-name {
@@ -129,7 +150,7 @@ input {
 }
 
 .btn-arrow {
-    width: 30%;
+    width: 69px;
 }
 
 .btn-arrowUp {
@@ -140,16 +161,7 @@ input {
     }
 }
 
-// .btn-content {
-//     width: 667px;
-//     height: 397px;
-//     background-color: #3282F7;
 
-//     position: absolute;
-//     top: 69px;
-
-//     border-radius: 0 0 5px 5px;
-// }
 
 .search-text {
     font-family: "Lato", "Roboto", sans-serif;
