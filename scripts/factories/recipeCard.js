@@ -19,7 +19,7 @@ export function recipeCard(recipes) {
                                             <div class="recipe-duration"><img src="assets/img/icon-time.svg" alt="Icone Temps de préparation"><p>${time} min</p></div>
                                             </div>
                                                 <div class="details-description">
-                                                    <div class="recipe-necessary"><ul>${ingredients.map(elt => recipeIngredient(elt))}</ul></div>
+                                                    <div class="recipe-necessary"><ul>${ingredients.map(elt => recipeIngredient(elt)).join('')}</ul></div>
                                                     <div class="recipe-describe">${description}</div>
                                                 </div>
                                             </div>

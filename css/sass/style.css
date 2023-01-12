@@ -44,9 +44,7 @@ ul, li {
 input {
   margin: 0;
   padding: 0;
-}
-input:focus-visible {
-  display: none;
+  outline: none;
 }
 
 .hide {
@@ -73,14 +71,6 @@ input:focus-visible {
   font-size: 18px;
   font-weight: 400;
   line-height: 21.6px;
-}
-.searchbar::-moz-placeholder {
-  padding-left: 24px;
-}
-.searchbar:-ms-input-placeholder {
-  padding-left: 24px;
-}
-.searchbar::placeholder {
   padding-left: 24px;
 }
 
@@ -113,6 +103,7 @@ input:focus-visible {
   border-radius: 5px;
 }
 .btn-select#ing-select {
+  width: 667px;
   background-color: #3282F7;
   border-color: #3282F7;
 }
@@ -149,11 +140,28 @@ input:focus-visible {
 }
 
 .list-container {
+  display: flex;
+  flex-flow: column wrap;
+  height: 397px;
   background-color: #3282F7;
   border-radius: 0 0 5px 5px;
   text-align: left;
   word-wrap: keep-all;
-  padding: 5px 20px;
+  padding: 5px 5px 5px 50px;
+}
+
+.list-content {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+
+li {
+  flex: 0 33%;
+  font-family: "Lato";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21.6px;
 }
 
 .btn-name {
