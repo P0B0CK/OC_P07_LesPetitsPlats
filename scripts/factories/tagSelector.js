@@ -14,8 +14,8 @@ export function getSelectorsTags(tabTag) {
         const btnContent = document.createElement('div');
             btnContent.setAttribute('class', 'btn-content');
 
-            btnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
-            btnContent.innerHTML = `<div ><input type="search" class="btn-search hide" placeholder="Recherche un ${tabTag.toLowerCase()}" ></div>`;
+            btnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>
+            <div><input type="text" class="btn-search hide" placeholder="Recherche un ${tabTag.toLowerCase()}" ></div>`;
 
         const btnArrow = document.createElement('div');
             btnArrow.setAttribute('class', 'btn-arrow');
@@ -43,35 +43,8 @@ export function getSelectorsTags(tabTag) {
 export function getTagList(tabTag) {
 
     const tagElt = document.createElement('li');
-        tagElt.setAttribute('class', 'tag-elt');
+        tagElt.setAttribute('class', 'tag-elt hide');
     tagElt.innerHTML = `${tabTag}`;
 
     return tagElt;
 };
-
-// export function getListTag(tabTag) {
-//     const btnSelectDOM = document.querySelectorAll('.btn-select');
-//     const btnContentDOM = document.querySelectorAll('.btn-content');
-//     const tabName = Object.keys(tabTag);
-
-//     const listContainer =  document.createElement('div');
-//         listContainer.setAttribute('class', 'list-container');
-//         const listContent = document.createElement('ul');
-//             listContent.setAttribute('class', 'list-content');
-//     listContainer.appendChild(listContent);
-
-//     return listContainer;
-// }
-
-
-
-    // tabTag.tabName[i].forEach( elt => {
-    //     const listTag = `<li>${tabTag.array[i]}</li>`;
-    //     listTag.setAttribute('class', 'list-tag');
-    // });
-
-
-    // console.log(listContainer);
-    // console.log(btnSelectDOM);
-    // console.log(btnContentDOM);
-    // console.log(tabTag, tabName);

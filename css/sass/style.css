@@ -127,7 +127,7 @@ input {
 
 .btn-search {
   width: 100%;
-  height: 100%;
+  height: auto;
   justify-content: space-between;
   align-items: center;
   position: absolute;
@@ -137,17 +137,68 @@ input {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0);
   border-color: rgba(0, 0, 0, 0);
+  color: white;
+}
+.btn-search::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.btn-search:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.btn-search::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .list-container {
   display: flex;
   flex-flow: column wrap;
   height: 397px;
-  background-color: #3282F7;
   border-radius: 0 0 5px 5px;
   text-align: left;
   word-wrap: keep-all;
-  padding: 5px 5px 5px 50px;
+  padding: 5px 5px 5px 19px;
+}
+
+#ing-select .list-container {
+  background-color: #3282F7;
+}
+#ing-select .list-container .list-content::-webkit-scrollbar {
+  width: 9px;
+}
+#ing-select .list-container .list-content::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+#ing-select .list-container .list-content::-webkit-scrollbar-thumb {
+  background-color: #2461bc;
+  border-radius: 50px;
+}
+
+#app-select .list-container {
+  background-color: #68D9A4;
+}
+#app-select .list-container .list-content::-webkit-scrollbar {
+  width: 9px;
+}
+#app-select .list-container .list-content::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+#app-select .list-container .list-content::-webkit-scrollbar-thumb {
+  background-color: #31ae74;
+  border-radius: 50px;
+}
+
+#ust-select .list-container {
+  background-color: #ED6454;
+}
+#ust-select .list-container .list-content::-webkit-scrollbar {
+  width: 9px;
+}
+#ust-select .list-container .list-content::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+#ust-select .list-container .list-content::-webkit-scrollbar-thumb {
+  background-color: #cc4c3d;
+  border-radius: 50px;
 }
 
 .list-content {
@@ -178,6 +229,10 @@ li {
 }
 .btn-arrowUp :active {
   transform: rotateX(-180deg);
+}
+
+input .btn-search {
+  color: white;
 }
 
 .search-text {
