@@ -72,6 +72,10 @@ input {
     padding-left: 24px;
 }
 
+.searchbar-error {
+    border: 3px solid rgba( 237, 100, 84, .6);
+}
+
 .searchbar-img {
     position: absolute;
     bottom: 0; right : 17px; top : 25%;

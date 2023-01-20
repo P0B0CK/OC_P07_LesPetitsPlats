@@ -2,6 +2,8 @@ import { recipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
 import { getRecipesTags } from "../factories/datasTags.js";
 import { getSelectorsTags, getTagList } from "../factories/tagSelector.js";
+// import { getSearchRecipes } from "../factories/searchFor.js";
+
 
 /**
  * SECTION SEARCH TAG
@@ -62,7 +64,7 @@ function handleTaglist() {
     const listUstDOM = selectUst.children[1].children[0];
     // console.log(listIngDOM);
     // console.log(listAppDOM);
-    console.log(listUstDOM);
+    // console.log(listUstDOM);
     
     const tagIng = tabTag.Ingredients;
     const tagApp = tabTag.Appareil;
@@ -71,12 +73,42 @@ function handleTaglist() {
     tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing))});
     tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app))});
     tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust))});
+
 };
+
+// FOR METHOD
+
+const searchBar = document.querySelector('.searchbar');
+
+searchBar.addEventListener('keyup', (e) => {
+    const searchedContent = e.target.value;
+    const recipesCards = document.querySelectorAll('.recipe-card');
+    getSearchFiltred(searchedContent, recipesCards);
+});
+
+function getSearchFiltred(value, cards){
+    if (value.length > 2) {
+        for ( let i = 0 ; i < cards.length ; i++) {
+            if(cards[i].textContent.toLowerCase().includes(value)) {
+                cards[i].style.display = "block";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+
+    } else if (value.length >= 1 && value.length <= 2){
+        // else >> message d'erreur
+        return console.log("erreur : renseignez au moins 3 caractères.");
+    } else {
+
+    }
+}
 
 function init() {
     handleRecipes();
     handleSelector();
     handleTaglist(tabTag);
+    getSearchFiltred(recipeCard);
 }
 
 init()
