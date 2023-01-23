@@ -76,32 +76,48 @@ function handleTaglist() {
 
 };
 
-// FOR METHOD
+// FOR METHOD : // revoir via diagramee
+
 
 const searchBar = document.querySelector('.searchbar');
 
 searchBar.addEventListener('keyup', (e) => {
     const searchedContent = e.target.value;
-    const recipesCards = document.querySelectorAll('.recipe-card');
-    getSearchFiltred(searchedContent, recipesCards);
+    // const recipesCards = document.querySelectorAll('.recipe-card');
+    getSearchFiltred(searchedContent, recipes);
 });
 
-function getSearchFiltred(value, cards){
+// f (liste des recettes)
+// return tableau des recettes fltrées
+function getSearchFiltred(value, recipes){
+    // NOUVEAU ARRAY contenant les recettes recherchées filtrés :
+    let arrayFiltredSearch = [];
+    // SI : il y a 3 caractères ma recherche débute :
     if (value.length > 2) {
-        for ( let i = 0 ; i < cards.length ; i++) {
-            if(cards[i].textContent.toLowerCase().includes(value)) {
-                cards[i].style.display = "block";
-            } else {
-                cards[i].style.display = "none";
+        console.log('SEARCH STARTED');
+        console.log( recipes[0].ingredients);
+        // Parcours les éléments (recette) du tableau des recettes :
+        for ( let i = 0 ; i < recipes.length ; i++ ) {
+            // Si le nom comporte la valeur = VRAI
+            if (recipes[i].name.toLowerCase().includes(value) == true) {
+                arrayFiltredSearch.push(recipes[i]);
+            }
+            // Si la description comporte la valeur = VRAI 
+            else if (recipes[i].description.toLowerCase().includes(value) == true) {
+                arrayFiltredSearch.push(recipes[i]);
+            } else if (recipes[i].name.toLowerCase().includes(value) && recipes[i].description.toLowerCase().includes(value) == false) {
+                for ( let i = 0 ; i < recipes.length ; i++ ) {
+                    // console.log(ingredients);
+                }
+            }
+            else {
+                // recipes[i].style.display = 'none';
             }
         }
-
-    } else if (value.length >= 1 && value.length <= 2){
-        // else >> message d'erreur
-        return console.log("erreur : renseignez au moins 3 caractères.");
-    } else {
-
     }
+    // SINON : ma recherche spécifie une erreur :
+    else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
+    console.log(arrayFiltredSearch);
 }
 
 function init() {

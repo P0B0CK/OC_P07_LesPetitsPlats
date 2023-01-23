@@ -1,5 +1,4 @@
 
-
 // FOR METHOD
 
 const searchBar = document.querySelector('.searchbar');
@@ -20,8 +19,9 @@ function getSearchFiltred(value, cards){
             }
         }
 
-    } else {
+    } else if (value.lenght > 0 && value.lenght < 3) {
         // else >> message d'erreur
-        return console.log("erreur : renseignez au moins 3 caractères.")
+        console.log(value)
+        console.log("erreur : renseignez au moins 3 caractères.")
     }
 }
