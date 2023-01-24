@@ -95,9 +95,9 @@ function getSearchFiltred(value, recipes){
     // SI : il y a 3 caractères ma recherche débute :
     if (value.length > 2) {
         console.log('SEARCH STARTED');
-        console.log( recipes[0].ingredients);
         // Parcours les éléments (recette) du tableau des recettes :
         for ( let i = 0 ; i < recipes.length ; i++ ) {
+            // console.log(recipes[i].ingredients)
             // Si le nom comporte la valeur = VRAI
             if (recipes[i].name.toLowerCase().includes(value) == true) {
                 arrayFiltredSearch.push(recipes[i]);
@@ -105,9 +105,16 @@ function getSearchFiltred(value, recipes){
             // Si la description comporte la valeur = VRAI 
             else if (recipes[i].description.toLowerCase().includes(value) == true) {
                 arrayFiltredSearch.push(recipes[i]);
-            } else if (recipes[i].name.toLowerCase().includes(value) && recipes[i].description.toLowerCase().includes(value) == false) {
-                for ( let i = 0 ; i < recipes.length ; i++ ) {
-                    // console.log(ingredients);
+            } 
+            // Si NI le nom Ni la description ne comporte la recherche
+            else if (recipes[i].name.toLowerCase().includes(value) && recipes[i].description.toLowerCase().includes(value) == false) {
+                // Parcourir le tableau des ingrédients de la recette : 
+                for ( let i = 0 ; i < recipes[i].ingredients.length ; i++ ) {
+                    // Si le tableau comporte la valeur recherchée  == VRAI
+                    if ( recipes[i].ingredients.toLowerCase().includes(value) == true) {
+                        arrayFiltredSearch.push(recipes[i]);
+                        console.log('trouvééééé !')
+                    } else {};
                 }
             }
             else {
