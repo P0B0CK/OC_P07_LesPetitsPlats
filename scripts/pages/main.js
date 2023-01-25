@@ -92,30 +92,29 @@ searchBar.addEventListener('keyup', (e) => {
 function getSearchFiltred(value, recipes){
     // NOUVEAU ARRAY contenant les recettes recherchées filtrés :
     let arrayFiltredSearch = [];
-    // SI : il y a 3 caractères ma recherche débute :
+
+    // CONDITION GENERALE ::
+    // SI : ma valeur de recherche SUP à 2 caractères, elle débute :
     if (value.length > 2) {
         console.log('SEARCH STARTED');
+
+        //BOUCLE ::
         // Parcours les éléments (recette) du tableau des recettes :
         for ( let i = 0 ; i < recipes.length ; i++ ) {
-            // console.log(recipes[i].ingredients)
-            // Si le nom comporte la valeur = VRAI
+
+            // CONDITION ::
+            // SI ( La RECETTE d'index i comporte la valeur recherchée dans son NOM) => { AJOUTE la RECETTE au tableau }::
             if (recipes[i].name.toLowerCase().includes(value) == true) {
                 arrayFiltredSearch.push(recipes[i]);
             }
-            // Si la description comporte la valeur = VRAI 
+            // SINON SI ( La RECETTE d'index i comporte la valeur recherchée dans sa DESCRIPTION) => { AJOUTE la RECETTE au tableau }:: 
             else if (recipes[i].description.toLowerCase().includes(value) == true) {
                 arrayFiltredSearch.push(recipes[i]);
             } 
-            // Si NI le nom Ni la description ne comporte la recherche
-            else if (recipes[i].name.toLowerCase().includes(value) && recipes[i].description.toLowerCase().includes(value) == false) {
-                // Parcourir le tableau des ingrédients de la recette : 
-                for ( let i = 0 ; i < recipes[i].ingredients.length ; i++ ) {
-                    // Si le tableau comporte la valeur recherchée  == VRAI
-                    if ( recipes[i].ingredients.toLowerCase().includes(value) == true) {
-                        arrayFiltredSearch.push(recipes[i]);
-                        console.log('trouvééééé !')
-                    } else {};
-                }
+            // SINON SI ( La RECETTE d'index i comporte la valeur recherchée dans ses INGREDIENTS) => { AJOUTE la RECETTE au tableau }::
+            else if ( recipes[i].ingredients.toLowerCase().includes(value) == true ) {
+                console.log(recipes[i].ingredients);
+                arrayFiltredSearch.push(recipes[i]);
             }
             else {
                 // recipes[i].style.display = 'none';
@@ -135,3 +134,16 @@ function init() {
 }
 
 init()
+
+
+                // Parcourir le tableau des ingrédients de la recette : 
+                // for ( let i = 0 ; i < recipes.ingredients[i].length ; i++ ) {
+                //     console.log(recipes.ingredients[i])
+                // //     // Si le tableau comporte la valeur recherchée  == VRAI
+                // //     if ( recipes.ingredients[i].toLowerCase().includes(value) == true) {
+                // //         arrayFiltredSearch.push(recipes[i]);
+                // //         console.log('trouvééééé !')
+                //     // } else {
+                //     //     console.log('ERREUR');
+                //     // };
+                // }
