@@ -93,36 +93,70 @@ function getSearchFiltred(value, recipes){
     // NOUVEAU ARRAY contenant les recettes recherchées filtrés :
     let arrayFiltredSearch = [];
 
-    // CONDITION GENERALE ::
-    // SI : ma valeur de recherche SUP à 2 caractères, elle débute :
-    if (value.length > 2) {
+    while ( value.length > 2 ) {
         console.log('SEARCH STARTED');
-
-        //BOUCLE ::
-        // Parcours les éléments (recette) du tableau des recettes :
-        for ( let i = 0 ; i < recipes.length ; i++ ) {
-
+        // BOUCLE ::
+        // POUR CHAQUE recette du tableau des recettes :
+        
+        for ( let recipe of recipes) {
+            
             // CONDITION ::
-            // SI ( La RECETTE d'index i comporte la valeur recherchée dans son NOM) => { AJOUTE la RECETTE au tableau }::
-            if (recipes[i].name.toLowerCase().includes(value) == true) {
-                arrayFiltredSearch.push(recipes[i]);
-            }
-            // SINON SI ( La RECETTE d'index i comporte la valeur recherchée dans sa DESCRIPTION) => { AJOUTE la RECETTE au tableau }:: 
-            else if (recipes[i].description.toLowerCase().includes(value) == true) {
-                arrayFiltredSearch.push(recipes[i]);
+            // SI ( le nom de la recette comporte la valeur recherchée dans son NOM) => { AJOUTE la RECETTE au tableau }::
+            if (recipe.name.toLowerCase().includes(value) == true) {
+                arrayFiltredSearch.push(recipe);
             } 
-            // SINON SI ( La RECETTE d'index i comporte la valeur recherchée dans ses INGREDIENTS) => { AJOUTE la RECETTE au tableau }::
-            else if ( recipes[i].ingredients.toLowerCase().includes(value) == true ) {
-                console.log(recipes[i].ingredients);
-                arrayFiltredSearch.push(recipes[i]);
-            }
-            else {
-                // recipes[i].style.display = 'none';
+            // CONDITION ::
+            // SI ( la description de la recette comporte la valeur recherchée dans son NOM) => { AJOUTE la RECETTE au tableau }::
+            else if (recipe.description.toLowerCase().includes(value) == true) {
+                arrayFiltredSearch.push(recipe);
+                break;
             }
         }
+        break;    
+
+            // else {
+            //     for ( let i in recipe.ingredients) {
+            //         if ( ingredient[i].toLowerCase().includes(value) == true) {
+            //             arrayFiltredSearch.push(recipe);
+            //             console.log(recipe);
+            //         }
+            //     }
+            // }
+        
     }
-    // SINON : ma recherche spécifie une erreur :
-    else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
+
+    // // CONDITION GENERALE ::
+    // // SI : ma valeur de recherche SUP à 2 caractères, elle débute :
+    // if (value.length > 2) {
+    //     console.log('SEARCH STARTED');
+    //     // BOUCLE ::
+    //     // POUR CHAQUE recette du tableau des recettes :
+    //     for ( let recipe of recipes) {
+    //         // CONDITION ::
+    //         // SI ( le nom de la recette comporte la valeur recherchée dans son NOM) => { AJOUTE la RECETTE au tableau }::
+    //         if (recipe.name.toLowerCase().includes(value) == true) {
+    //             arrayFiltredSearch.push(recipe);
+    //         } 
+    //         // CONDITION ::
+    //         // SI ( la description de la recette comporte la valeur recherchée dans son NOM) => { AJOUTE la RECETTE au tableau }::
+    //         else if (recipe.description.toLowerCase().includes(value) == true) {
+    //             arrayFiltredSearch.push(recipe);
+    //         }
+
+    //         else {
+    //             for ( let i in recipe.ingredients) {
+    //                 if ( ingredient[i].toLowerCase().includes(value) == true) {
+    //                     arrayFiltredSearch.push(recipe);
+    //                     console.log(recipe);
+    //                 }
+    //             }
+    //         }
+
+    //     }
+
+    // }
+    // // SINON : ma recherche spécifie une erreur :
+    // else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
     console.log(arrayFiltredSearch);
 }
 
