@@ -1724,3 +1724,6 @@ export const recipes = [
         "ustensils":["rouleau à patisserie","fouet"]
     }
 ]
+
+// getSearchFiltredWithFor(value, recipes);
+// getSearchFiltredWithFilter(value, recipes);

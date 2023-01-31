@@ -125,39 +125,34 @@ function getSearchFiltredWithFor(value, recipes){
         }
     }
     else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
-    console.log(arrayFiltredSearch);
+    // console.log(arrayFiltredSearch);
+    return arrayFiltredSearch;
 }
 
 function getSearchFiltredWithFilter(value, recipes){
     let arrayFiltredSearch = [];
 
     if ( value.length > 2 ) {
-        console.log(recipes);
-        for ( let recipe of recipes) {
-            
-           
-            if (recipe.name.toLowerCase().includes(value) == true) {
+        recipes.forEach( recipe => {
+            if (recipe.name.toLowerCase().includes(value.toLowerCase())) {
                 arrayFiltredSearch.push(recipe);
-            } 
-            
-            else if (recipe.description.toLowerCase().includes(value) == true) {
+            } else if (recipe.description.toLowerCase().includes(value.toLowerCase())) {
                 arrayFiltredSearch.push(recipe);
-            }
-
-            else {
-                for ( let i in recipe.ingredients) {
-                    if ( recipe.ingredients[i].ingredient.toLowerCase().includes(value) == true) {
-                        arrayFiltredSearch.push(recipe);
-                        console.log(i);
-                        console.log(recipe);
-                        break;
+            } else {
+                recipe.ingredients.forEach( ingredient => {
+                    if (ingredient.ingredient.toLowerCase().includes(value.toLowerCase())) {
+                        if ( !arrayFiltredSearch.includes(recipe)) {
+                            arrayFiltredSearch.push(recipe);
+                        }
                     }
-                }
+                });
             }
-        }
+        });
     }
     else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
-    console.log(arrayFiltredSearch);
+    // console.log(arrayFiltredSearch);
+
+    return arrayFiltredSearch;
 }
 
 function init() {
