@@ -3,7 +3,7 @@ import { recipeCard } from "../factories/recipeCard.js";
 import { getRecipesTags } from "../factories/datasTags.js";
 import { getSelectorsTags, getTagList } from "../factories/tagSelector.js";
 
-import { getFiltredRecipes } from "../factories/searchArray.js";
+import { getFilteredRecipes } from "../factories/searchArray.js";
 // import { getFiltredRecipes } from "../factories/searchFor.js";
 
 // import { getSearchRecipes } from "../factories/searchFor.js";
@@ -13,7 +13,7 @@ import { getFiltredRecipes } from "../factories/searchArray.js";
  * SECTION SEARCH TAG
  * + selector place
  * + tags place (!)
- */
+*/
 const searchtag = document.querySelector('#searchtag');
 const tagsSelectors = document.querySelector('.tag-selectors');
 
@@ -29,14 +29,24 @@ const listContentDOM = document.querySelectorAll('.list-content');
 let tabTag = getRecipesTags(recipes);
 const tabName = Object.keys(tabTag);
 
-/**
- * Ajoute les recettes
- */
-function handleRecipes() {
-    // recipes.forEach((recipe) => console.log(recipe));
-    let displayRecipes = recipes.forEach((recipe) => new recipeCard(recipe));
-    
-    return displayRecipes
+
+
+const searchBar = document.querySelector('.searchbar');
+
+searchBar.addEventListener('keyup', (e) => {
+    const searchedContent = e.target.value;
+    handleRecipes(searchedContent, recipes);
+});
+
+function handleRecipes(value, recipes) {
+
+    let displayRecipes = [];
+
+    if (value.length < 0) {
+        displayRecipes = recipes.forEach((recipe) => new recipeCard(recipe));
+    } else {
+        displayRecipes = getFilteredRecipes(value, recipes);
+    }
 }
 
 /**
@@ -82,100 +92,11 @@ function handleTaglist() {
 
 };
 
-const searchBar = document.querySelector('.searchbar');
-
-searchBar.addEventListener('keyup', (e) => {
-    const searchedContent = e.target.value;
-    // const recipesCards = document.querySelectorAll('.recipe-card');
-    getSearchFiltred(searchedContent, recipes);
-});
-
-// f (liste des recettes)
-// return tableau des recettes fltrées
-function getSearchFiltred(value, recipes){
-
-    // getSearchFiltredWithFor(value, recipes);
-    getFiltredRecipes(value, recipes);
-
-}
-
-// // // function getSearchFiltredWithFor(value, recipes){
-// // //     let arrayFiltredSearch = [];
-
-// // //     if ( value.length > 2 ) {
-// // //         console.log(recipes);
-// // //         for ( let recipe of recipes) {
-            
-           
-// // //             if (recipe.name.toLowerCase().includes(value) == true) {
-// // //                 arrayFiltredSearch.push(recipe);
-// // //             } 
-            
-// // //             else if (recipe.description.toLowerCase().includes(value) == true) {
-// // //                 arrayFiltredSearch.push(recipe);
-// // //             }
-
-// // //             else {
-// // //                 for ( let i in recipe.ingredients) {
-// // //                     if ( recipe.ingredients[i].ingredient.toLowerCase().includes(value) == true) {
-// // //                         arrayFiltredSearch.push(recipe);
-// // //                         console.log(i);
-// // //                         console.log(recipe);
-// // //                         break;
-// // //                     }
-// // //                 }
-// // //             }
-// // //         }
-// // //     }
-// // //     else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
-// // //     // console.log(arrayFiltredSearch);
-// // //     return arrayFiltredSearch;
-// // // }
-
-// // // function getSearchFiltredWithFilter(value, recipes){
-// // //     let arrayFiltredSearch = [];
-
-// // //     if ( value.length > 2 ) {
-// // //         recipes.forEach( recipe => {
-// // //             if (recipe.name.toLowerCase().includes(value.toLowerCase())) {
-// // //                 arrayFiltredSearch.push(recipe);
-// // //             } else if (recipe.description.toLowerCase().includes(value.toLowerCase())) {
-// // //                 arrayFiltredSearch.push(recipe);
-// // //             } else {
-// // //                 recipe.ingredients.forEach( ingredient => {
-// // //                     if (ingredient.ingredient.toLowerCase().includes(value.toLowerCase())) {
-// // //                         if ( !arrayFiltredSearch.includes(recipe)) {
-// // //                             arrayFiltredSearch.push(recipe);
-// // //                         }
-// // //                     }
-// // //                 });
-// // //             }
-// // //         });
-// // //     }
-// // //     else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
-// // //     // console.log(arrayFiltredSearch);
-
-// // //     return arrayFiltredSearch;
-// // // }
-
 function init() {
-    handleRecipes();
+    handleRecipes(recipes, getFilteredRecipes);
     handleSelector();
     handleTaglist(tabTag);
     getSearchFiltred(recipeCard);
 }
 
 init()
-
-
-                // Parcourir le tableau des ingrédients de la recette : 
-                // for ( let i = 0 ; i < recipes.ingredients[i].length ; i++ ) {
-                //     console.log(recipes.ingredients[i])
-                // //     // Si le tableau comporte la valeur recherchée  == VRAI
-                // //     if ( recipes.ingredients[i].toLowerCase().includes(value) == true) {
-                // //         arrayFiltredSearch.push(recipes[i]);
-                // //         console.log('trouvééééé !')
-                //     // } else {
-                //     //     console.log('ERREUR');
-                //     // };
-                // }

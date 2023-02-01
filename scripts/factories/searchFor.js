@@ -5,22 +5,22 @@
  * @returns array of filtredRecipes
  */
 
-export function getFiltredRecipes(value, recipes){
-    let filtredRecipes = [];
+export function getFilteredRecipes(value, recipes){
+    let filteredRecipes = [];
 
     if ( value.length > 2 ) {
         
         for ( let recipe of recipes) {
     
             if (recipe.name.toLowerCase().includes(value) == true) {
-                filtredRecipes.push(recipe);
+                filteredRecipes.push(recipe);
             } else if (recipe.description.toLowerCase().includes(value) == true) {
-                filtredRecipes.push(recipe);
+                filteredRecipes.push(recipe);
             } else {
 
                 for ( let i in recipe.ingredients) {
                     if ( recipe.ingredients[i].ingredient.toLowerCase().includes(value) == true) {
-                        filtredRecipes.push(recipe);
+                        filteredRecipes.push(recipe);
                         break;
                     }
                 }
@@ -29,7 +29,7 @@ export function getFiltredRecipes(value, recipes){
         }
     }
     else if (value.length > 1 && value.length < 3) {console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');}
-    console.log(filtredRecipes);
+    console.log(filteredRecipes);
     console.log("FIND WITH FOR NATIVE METHODS");
-    return filtredRecipes;
+    return filteredRecipes;
 }
