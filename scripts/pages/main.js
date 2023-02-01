@@ -42,12 +42,14 @@ function handleRecipes(value, recipes) {
 
     let displayRecipes = [];
 
-    if (value.length < 0) {
+    if (value == null) {
         displayRecipes = recipes.forEach((recipe) => new recipeCard(recipe));
+        console.log(displayRecipes);
     } else {
         displayRecipes = getFilteredRecipes(value, recipes);
+        console.log(displayRecipes);
     }
-}
+};
 
 /**
  * Ajoute les sélecteurs de tags
