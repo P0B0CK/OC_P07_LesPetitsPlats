@@ -1,27 +1,34 @@
+/**
+ * SEARCH FILTRED BY FOR METHOD
+ * @param {*} value 
+ * @param {*} recipes 
+ * @returns array of filtredRecipes
+ */
 
-// FOR METHOD
+export function getFiltredRecipes(value, recipes){
+    let filtredRecipes = [];
 
-const searchBar = document.querySelector('.searchbar');
-
-searchBar.addEventListener('keyup', (e) => {
-    const searchedContent = e.target.value;
-    const recipesCards = document.querySelectorAll('.recipe-card');
-    getSearchFiltred(searchedContent, recipesCards);
-});
-
-function getSearchFiltred(value, cards){
-    if (value.lenght > 2) {
-        for ( let i = 0 ; i < cards.length ; i++) {
-            if(cards[i].textContent.toLowerCase().includes(value)) {
-                cards[i].style.display = "block";
+    if ( value.length > 2 ) {
+        
+        for ( let recipe of recipes) {
+    
+            if (recipe.name.toLowerCase().includes(value) == true) {
+                filtredRecipes.push(recipe);
+            } else if (recipe.description.toLowerCase().includes(value) == true) {
+                filtredRecipes.push(recipe);
             } else {
-                cards[i].style.display = "none";
+
+                for ( let i in recipe.ingredients) {
+                    if ( recipe.ingredients[i].ingredient.toLowerCase().includes(value) == true) {
+                        filtredRecipes.push(recipe);
+                        break;
+                    }
+                }
+
             }
         }
-
-    } else if (value.lenght > 0 && value.lenght < 3) {
-        // else >> message d'erreur
-        console.log(value)
-        console.log("erreur : renseignez au moins 3 caractères.")
     }
+    else if (value.length > 1 && value.length < 3) {console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');}
+
+    return filtredRecipes;
 }

@@ -30,7 +30,9 @@ const tabName = Object.keys(tabTag);
  */
 function handleRecipes() {
     // recipes.forEach((recipe) => console.log(recipe));
-    recipes.forEach((recipe) => new recipeCard(recipe));
+    let displayRecipes = recipes.forEach((recipe) => new recipeCard(recipe));
+    
+    return displayRecipes
 }
 
 /**
@@ -76,9 +78,6 @@ function handleTaglist() {
 
 };
 
-// FOR METHOD : // revoir via diagramee
-
-
 const searchBar = document.querySelector('.searchbar');
 
 searchBar.addEventListener('keyup', (e) => {
@@ -87,73 +86,73 @@ searchBar.addEventListener('keyup', (e) => {
     getSearchFiltred(searchedContent, recipes);
 });
 
-// f (liste des recettes)
-// return tableau des recettes fltrées
-function getSearchFiltred(value, recipes){
+// // // // f (liste des recettes)
+// // // // return tableau des recettes fltrées
+// // // function getSearchFiltred(value, recipes){
 
-    getSearchFiltredWithFor(value, recipes);
-    getSearchFiltredWithFilter(value, recipes);
+// // //     getSearchFiltredWithFor(value, recipes);
+// // //     getSearchFiltredWithFilter(value, recipes);
 
-}
+// // // }
 
-function getSearchFiltredWithFor(value, recipes){
-    let arrayFiltredSearch = [];
+// // // function getSearchFiltredWithFor(value, recipes){
+// // //     let arrayFiltredSearch = [];
 
-    if ( value.length > 2 ) {
-        console.log(recipes);
-        for ( let recipe of recipes) {
+// // //     if ( value.length > 2 ) {
+// // //         console.log(recipes);
+// // //         for ( let recipe of recipes) {
             
            
-            if (recipe.name.toLowerCase().includes(value) == true) {
-                arrayFiltredSearch.push(recipe);
-            } 
+// // //             if (recipe.name.toLowerCase().includes(value) == true) {
+// // //                 arrayFiltredSearch.push(recipe);
+// // //             } 
             
-            else if (recipe.description.toLowerCase().includes(value) == true) {
-                arrayFiltredSearch.push(recipe);
-            }
+// // //             else if (recipe.description.toLowerCase().includes(value) == true) {
+// // //                 arrayFiltredSearch.push(recipe);
+// // //             }
 
-            else {
-                for ( let i in recipe.ingredients) {
-                    if ( recipe.ingredients[i].ingredient.toLowerCase().includes(value) == true) {
-                        arrayFiltredSearch.push(recipe);
-                        console.log(i);
-                        console.log(recipe);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
-    // console.log(arrayFiltredSearch);
-    return arrayFiltredSearch;
-}
+// // //             else {
+// // //                 for ( let i in recipe.ingredients) {
+// // //                     if ( recipe.ingredients[i].ingredient.toLowerCase().includes(value) == true) {
+// // //                         arrayFiltredSearch.push(recipe);
+// // //                         console.log(i);
+// // //                         console.log(recipe);
+// // //                         break;
+// // //                     }
+// // //                 }
+// // //             }
+// // //         }
+// // //     }
+// // //     else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
+// // //     // console.log(arrayFiltredSearch);
+// // //     return arrayFiltredSearch;
+// // // }
 
-function getSearchFiltredWithFilter(value, recipes){
-    let arrayFiltredSearch = [];
+// // // function getSearchFiltredWithFilter(value, recipes){
+// // //     let arrayFiltredSearch = [];
 
-    if ( value.length > 2 ) {
-        recipes.forEach( recipe => {
-            if (recipe.name.toLowerCase().includes(value.toLowerCase())) {
-                arrayFiltredSearch.push(recipe);
-            } else if (recipe.description.toLowerCase().includes(value.toLowerCase())) {
-                arrayFiltredSearch.push(recipe);
-            } else {
-                recipe.ingredients.forEach( ingredient => {
-                    if (ingredient.ingredient.toLowerCase().includes(value.toLowerCase())) {
-                        if ( !arrayFiltredSearch.includes(recipe)) {
-                            arrayFiltredSearch.push(recipe);
-                        }
-                    }
-                });
-            }
-        });
-    }
-    else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
-    // console.log(arrayFiltredSearch);
+// // //     if ( value.length > 2 ) {
+// // //         recipes.forEach( recipe => {
+// // //             if (recipe.name.toLowerCase().includes(value.toLowerCase())) {
+// // //                 arrayFiltredSearch.push(recipe);
+// // //             } else if (recipe.description.toLowerCase().includes(value.toLowerCase())) {
+// // //                 arrayFiltredSearch.push(recipe);
+// // //             } else {
+// // //                 recipe.ingredients.forEach( ingredient => {
+// // //                     if (ingredient.ingredient.toLowerCase().includes(value.toLowerCase())) {
+// // //                         if ( !arrayFiltredSearch.includes(recipe)) {
+// // //                             arrayFiltredSearch.push(recipe);
+// // //                         }
+// // //                     }
+// // //                 });
+// // //             }
+// // //         });
+// // //     }
+// // //     else if (value.length > 1 && value.length < 3) {console.log('ERROR : Renseignez 3 caractères minimum');}
+// // //     // console.log(arrayFiltredSearch);
 
-    return arrayFiltredSearch;
-}
+// // //     return arrayFiltredSearch;
+// // // }
 
 function init() {
     handleRecipes();
