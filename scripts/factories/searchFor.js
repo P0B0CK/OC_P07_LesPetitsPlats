@@ -29,6 +29,7 @@ export function getFiltredRecipes(value, recipes){
         }
     }
     else if (value.length > 1 && value.length < 3) {console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');}
-
+    console.log(filtredRecipes);
+    console.log("FIND WITH FOR NATIVE METHODS");
     return filtredRecipes;
 }

@@ -2,6 +2,10 @@ import { recipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
 import { getRecipesTags } from "../factories/datasTags.js";
 import { getSelectorsTags, getTagList } from "../factories/tagSelector.js";
+
+import { getFiltredRecipes } from "../factories/searchArray.js";
+// import { getFiltredRecipes } from "../factories/searchFor.js";
+
 // import { getSearchRecipes } from "../factories/searchFor.js";
 
 
@@ -86,14 +90,14 @@ searchBar.addEventListener('keyup', (e) => {
     getSearchFiltred(searchedContent, recipes);
 });
 
-// // // // f (liste des recettes)
-// // // // return tableau des recettes fltrées
-// // // function getSearchFiltred(value, recipes){
+// f (liste des recettes)
+// return tableau des recettes fltrées
+function getSearchFiltred(value, recipes){
 
-// // //     getSearchFiltredWithFor(value, recipes);
-// // //     getSearchFiltredWithFilter(value, recipes);
+    // getSearchFiltredWithFor(value, recipes);
+    getFiltredRecipes(value, recipes);
 
-// // // }
+}
 
 // // // function getSearchFiltredWithFor(value, recipes){
 // // //     let arrayFiltredSearch = [];

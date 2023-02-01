@@ -17,16 +17,17 @@ export function getFiltredRecipes(value, recipes){
             } else {
                 recipe.ingredients.forEach( ingredient => {
                     if (ingredient.ingredient.toLowerCase().includes(value.toLowerCase())) {
-                        if ( filtredRecipes.includes(recipe)) {
+                        if ( !filtredRecipes.includes(recipe)) {
                             filtredRecipes.push(recipe);
-                        }
-                    }
+                        };
+                    };
                 });
-            }
+            };
         });
     }
-    else if (value.length > 1 && value.length < 3) {console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');}
-
+    else if (value.length > 1 && value.length < 3) {console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');};
+    console.log(filtredRecipes);
+    console.log("FIND WITH ARRAYS METHODS");
 
     return filtredRecipes;
 }
