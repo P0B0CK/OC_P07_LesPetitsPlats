@@ -38,17 +38,18 @@ searchBar.addEventListener('keyup', (e) => {
     handleRecipes(searchedContent, recipes);
 });
 
-function handleRecipes(value, recipes) {
+let displayRecipes = [];
 
-    let displayRecipes = [];
+function handleRecipes(value) {
+    displayRecipes = [];
 
-    if (value == null) {
-        displayRecipes = recipes.forEach((recipe) => new recipeCard(recipe));
-        console.log(displayRecipes);
+    if ( value === null || value.length <= 2 ) {
+        displayRecipes = recipes.map((recipe) => new recipeCard(recipe));
     } else {
-        displayRecipes = getFilteredRecipes(value, recipes);
-        console.log(displayRecipes);
+        displayRecipes = getFilteredRecipes(value, recipes).map((recipe) => new recipeCard(recipe));
     }
+
+    return displayRecipes;
 };
 
 /**
@@ -95,10 +96,9 @@ function handleTaglist() {
 };
 
 function init() {
-    handleRecipes(recipes, getFilteredRecipes);
+    handleRecipes(recipes, recipeCard, getFilteredRecipes);
     handleSelector();
     handleTaglist(tabTag);
-    getSearchFiltred(recipeCard);
 }
 
 init()

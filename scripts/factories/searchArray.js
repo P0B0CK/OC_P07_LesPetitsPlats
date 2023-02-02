@@ -1,3 +1,5 @@
+import { recipes } from "../../datas/recipes.js";
+
 /**
  * SEARCH FILTRED BY ARRAYS METHODS
  * @param {*} value 
@@ -5,18 +7,19 @@
  * @returns array of filtred recipes
  */
 
-export function getFilteredRecipes(value, recipes){
+export function getFilteredRecipes(value){
     let filteredRecipes = [];
+
 
     if ( value.length > 2 ) {
         recipes.forEach( recipe => {
-            if (recipe.name.toLowerCase().includes(value.toLowerCase())) {
+            if (recipe.name.toLowerCase().includes(value.toString().toLowerCase())) {
                 filteredRecipes.push(recipe);
-            } else if (recipe.description.toLowerCase().includes(value.toLowerCase())) {
+            } else if (recipe.description.toLowerCase().includes(value.toString().toLowerCase())) {
                 filteredRecipes.push(recipe);
             } else {
                 recipe.ingredients.forEach( ingredient => {
-                    if (ingredient.ingredient.toLowerCase().includes(value.toLowerCase())) {
+                    if (ingredient.ingredient.toLowerCase().includes(value.toString().toLowerCase())) {
                         if ( !filteredRecipes.includes(recipe)) {
                             filteredRecipes.push(recipe);
                         };
