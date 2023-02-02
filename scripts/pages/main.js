@@ -41,14 +41,19 @@ searchBar.addEventListener('keyup', (e) => {
 let displayRecipes = [];
 
 function handleRecipes(value) {
-    displayRecipes = [];
 
-    if ( value === null || value.length <= 2 ) {
-        displayRecipes = recipes.map((recipe) => new recipeCard(recipe));
-    } else {
+    displayRecipes = recipes.map((recipe) => new recipeCard(recipe));
+
+    // if (value === null || value.length < 3) {
+    //     // displayRecipes = recipes.map((recipe) => new recipeCard(recipe));
+    //     // displayRecipes = getFilteredRecipes(value, recipes).map((recipe) => new recipeCard(recipe));
+    // } 
+    
+    if (value.length > 2) {
+        displayRecipes = [];
         displayRecipes = getFilteredRecipes(value, recipes).map((recipe) => new recipeCard(recipe));
     }
-
+    
     return displayRecipes;
 };
 
