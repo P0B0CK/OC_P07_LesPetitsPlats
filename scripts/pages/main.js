@@ -1,12 +1,9 @@
-import { recipes } from "../../datas/recipes.js";
+import { datasRecipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
 import { getRecipesTags } from "../factories/datasTags.js";
 import { getSelectorsTags, getTagList } from "../factories/tagSelector.js";
 
 import { getFilteredRecipes } from "../factories/searchArray.js";
-// import { getFiltredRecipes } from "../factories/searchFor.js";
-
-// import { getSearchRecipes } from "../factories/searchFor.js";
 
 
 /**
@@ -21,12 +18,16 @@ const btnSelectDOM = document.querySelectorAll('.btn-select');
 const btnContentDOM = document.querySelectorAll('.btn-content');
 const listContentDOM = document.querySelectorAll('.list-content');
 
+let orderedRecipes = [];
 
+function sortRecipes(recipes) {
+    return null
+}
 
 /**
  * NEW TAG'S LIST ARRAY
 */
-let tabTag = getRecipesTags(recipes);
+let tabTag = getRecipesTags(datasRecipes);
 const tabName = Object.keys(tabTag);
 
 
@@ -35,27 +36,25 @@ const searchBar = document.querySelector('.searchbar');
 
 searchBar.addEventListener('keyup', (e) => {
     const searchedContent = e.target.value;
-    handleRecipes(searchedContent, recipes);
+    handleRecipes(searchedContent, datasRecipes);
 });
 
-let displayRecipes = [];
+//let displayRecipes = [];
 
 function handleRecipes(value) {
+    displayRecipes(datasRecipes);
 
-    displayRecipes = recipes.map((recipe) => new recipeCard(recipe));
-
-    // if (value === null || value.length < 3) {
-    //     // displayRecipes = recipes.map((recipe) => new recipeCard(recipe));
-    //     // displayRecipes = getFilteredRecipes(value, recipes).map((recipe) => new recipeCard(recipe));
-    // } 
-    
     if (value.length > 2) {
-        displayRecipes = [];
-        displayRecipes = getFilteredRecipes(value, recipes).map((recipe) => new recipeCard(recipe));
+        let filteredRecipes = getFilteredRecipes(value, datasRecipes);
+        displayRecipes(filteredRecipes);
     }
-    
-    return displayRecipes;
 };
+
+function displayRecipes(recipes) {
+    const searchresults = document.getElementById('searchresults');
+    searchresults.innerHTML = '';
+    recipes.map((recipe) => new recipeCard(recipe));
+}
 
 /**
  * Ajoute les sélecteurs de tags
@@ -101,7 +100,8 @@ function handleTaglist() {
 };
 
 function init() {
-    handleRecipes(recipes, recipeCard, getFilteredRecipes);
+    // orderedRecipes = sortRecipes(recipes);
+    displayRecipes(datasRecipes);
     handleSelector();
     handleTaglist(tabTag);
 }

@@ -1,5 +1,3 @@
-import { recipes } from "../../datas/recipes.js";
-
 /**
  * SEARCH FILTRED BY ARRAYS METHODS
  * @param {*} value 
@@ -7,7 +5,7 @@ import { recipes } from "../../datas/recipes.js";
  * @returns array of filtred recipes
  */
 
-export function getFilteredRecipes(value){
+export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];
 
 

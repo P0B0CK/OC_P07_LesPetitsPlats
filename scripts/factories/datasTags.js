@@ -1,5 +1,3 @@
-import { recipes } from "../../datas/recipes.js";
-
 /**
  * 
  * @param {datas tags array} recipes

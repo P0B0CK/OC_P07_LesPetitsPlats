@@ -1,5 +1,3 @@
-import { recipes } from "../../datas/recipes.js";
-
 export function recipeCard(recipes) {
 
     const { id, name, servings, ingredients, time, description, appliance, ustensils } = recipes;

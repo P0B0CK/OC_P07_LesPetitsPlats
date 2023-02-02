@@ -1,6 +1,3 @@
-import { recipes } from "../../datas/recipes.js";
-
-
 /**
  * 
  * @param {object btn tags selectors} tabTag
