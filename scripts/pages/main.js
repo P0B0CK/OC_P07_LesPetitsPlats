@@ -18,6 +18,11 @@ const btnSelectDOM = document.querySelectorAll('.btn-select');
 const btnContentDOM = document.querySelectorAll('.btn-content');
 const listContentDOM = document.querySelectorAll('.list-content');
 
+
+/**
+ * 
+ * @returns Tableau des recettes trié par ordre Alphabétique ::
+ */
 let orderedRecipes = [];
 
 function sortRecipes() {
