@@ -20,9 +20,20 @@ const listContentDOM = document.querySelectorAll('.list-content');
 
 let orderedRecipes = [];
 
-function sortRecipes(recipes) {
-    return null
-}
+function sortRecipes() {
+    orderedRecipes = datasRecipes.sort((a, b) => {
+        if  ( a.name < b.name ) {
+            return -1;
+        }
+        if ( a.name > b.name ) {
+            return 1;
+        }
+        else {
+            return 0
+        }
+    });
+    return orderedRecipes;
+};
 
 /**
  * NEW TAG'S LIST ARRAY
@@ -38,8 +49,6 @@ searchBar.addEventListener('keyup', (e) => {
     const searchedContent = e.target.value;
     handleRecipes(searchedContent, datasRecipes);
 });
-
-//let displayRecipes = [];
 
 function handleRecipes(value) {
     displayRecipes(datasRecipes);
@@ -57,7 +66,7 @@ function displayRecipes(recipes) {
 }
 
 /**
- * Ajoute les sélecteurs de tags
+ * Boutons SELECT Tags
  */
 function handleSelector() {
     
@@ -77,6 +86,9 @@ function handleSelector() {
 
 };
 
+/**
+ *  Affiche les boutons des Tags
+ */
 function handleTaglist() {
     const selectIng = document.querySelector('#ing-select');
     const selectApp = document.querySelector('#app-select');
@@ -85,9 +97,6 @@ function handleTaglist() {
     const listIngDOM = selectIng.children[1].children[0];
     const listAppDOM = selectApp.children[1].children[0];
     const listUstDOM = selectUst.children[1].children[0];
-    // console.log(listIngDOM);
-    // console.log(listAppDOM);
-    // console.log(listUstDOM);
     
     const tagIng = tabTag.Ingredients;
     const tagApp = tabTag.Appareil;
@@ -96,11 +105,10 @@ function handleTaglist() {
     tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing))});
     tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app))});
     tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust))});
-
 };
 
 function init() {
-    // orderedRecipes = sortRecipes(recipes);
+    orderedRecipes = sortRecipes();
     displayRecipes(datasRecipes);
     handleSelector();
     handleTaglist(tabTag);
