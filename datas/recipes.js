@@ -1723,7 +1723,4 @@ export const datasRecipes = [
         "appliance": "Four",
         "ustensils":["rouleau à patisserie","fouet"]
     }
-]
-
-// getSearchFiltredWithFor(value, recipes);
-// getSearchFiltredWithFilter(value, recipes);
+];

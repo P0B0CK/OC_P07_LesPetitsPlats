@@ -7,15 +7,15 @@
 export function getRecipesTags(recipes) {
     // Nouveaux tableaux sans doublon d'élément
     // Récupère les tags
-    const datasTags = { Ingredients : [] , Appareil: [] , Ustensiles : [] };
+    const datasTags = { Ingredients : [] , Appareils: [] , Ustensiles : [] };
 
     
     // Dans le tableau des recettes ( pour CHAQUE recette )
     recipes.forEach( recipe => {
         // SI ( l'appareil N'EST PAS DEJA inclu dans la liste des appareils des recettes)
         // ALORS l'appareil est AJOUTE au tableau des TAGS
-        if ( ! datasTags.Appareil.includes(recipe.appliance)) {
-            return datasTags.Appareil.push(recipe.appliance);
+        if ( ! datasTags.Appareils.includes(recipe.appliance)) {
+            return datasTags.Appareils.push(recipe.appliance);
         }
         
         // Popur CHAQUE ingrédient du tableau

@@ -100,29 +100,28 @@ input {
     text-align: center;
     line-height: 21.6px;
     cursor: pointer;
-    &:hover {
-        
-    }
-    &:active {
-        width: 667px;
-        justify-content: space-between;
-        border-radius: 5px;
-    }
     &#ing-select{
-        width: 667px;
         background-color: #3282F7;
         border-color: #3282F7;
     } 
-    
     &#app-select{
         background-color: #68D9A4;
         border-color: #68D9A4;
     }
-    
     &#ust-select{
         background-color: #ED6454;
         border-color: #ED6454;
     }
+}
+
+.btn-select-active {
+
+    position: relative;
+
+    width: 667px;
+    justify-content: space-between;
+    height: 69px;
+    cursor: pointer;
 }
 
 .btn-content {

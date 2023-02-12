@@ -41,13 +41,15 @@ function sortRecipes() {
 };
 
 /**
- * NEW TAG'S LIST ARRAY
+ * TABLEAU des tags & RECUPERATION des clés des listes::
 */
 let tabTag = getRecipesTags(datasRecipes);
 const tabName = Object.keys(tabTag);
 
 
-
+/**
+ * ECOUTER lors de la saisie dans la barre de recherche :: 
+ */
 const searchBar = document.querySelector('.searchbar');
 
 searchBar.addEventListener('keyup', (e) => {
@@ -55,6 +57,7 @@ searchBar.addEventListener('keyup', (e) => {
     handleRecipes(searchedContent, datasRecipes);
 });
 
+// GERER l'affichage des recette SI recherche en cour ::
 function handleRecipes(value) {
     displayRecipes(datasRecipes);
 
@@ -64,6 +67,10 @@ function handleRecipes(value) {
     }
 };
 
+/**
+ * AFFICHER les cartes recettes ::
+ * @param {recettes} recipes 
+ */
 function displayRecipes(recipes) {
     const searchresults = document.getElementById('searchresults');
     searchresults.innerHTML = '';
@@ -71,7 +78,8 @@ function displayRecipes(recipes) {
 }
 
 /**
- * Boutons SELECT Tags
+ *  GERER les sélecteurs en fonction de leur clé "nom" ::
+ *  AJOUTE l'id correspondant à son selecteur ::
  */
 function handleSelector() {
     
@@ -91,14 +99,15 @@ function handleSelector() {
 
 };
 
+
 /**
- *  Affiche les boutons des Tags
- */
+ *  GERER & GENERER pour chaque TYPE de selecteur la liste Correspondante ::
+*/
 function handleTaglist() {
     const selectIng = document.querySelector('#ing-select');
     const selectApp = document.querySelector('#app-select');
     const selectUst = document.querySelector('#ust-select');
-
+    
     const listIngDOM = selectIng.children[1].children[0];
     const listAppDOM = selectApp.children[1].children[0];
     const listUstDOM = selectUst.children[1].children[0];
@@ -111,6 +120,12 @@ function handleTaglist() {
     tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app))});
     tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust))});
 };
+
+/**
+ * 
+ */
+function handleSelectorState() {
+}
 
 function init() {
     orderedRecipes = sortRecipes();

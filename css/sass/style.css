@@ -101,13 +101,7 @@ input {
   line-height: 21.6px;
   cursor: pointer;
 }
-.btn-select:active {
-  width: 667px;
-  justify-content: space-between;
-  border-radius: 5px;
-}
 .btn-select#ing-select {
-  width: 667px;
   background-color: #3282F7;
   border-color: #3282F7;
 }
@@ -118,6 +112,14 @@ input {
 .btn-select#ust-select {
   background-color: #ED6454;
   border-color: #ED6454;
+}
+
+.btn-select-active {
+  position: relative;
+  width: 667px;
+  justify-content: space-between;
+  height: 69px;
+  cursor: pointer;
 }
 
 .btn-content {
@@ -144,9 +146,6 @@ input {
   color: white;
 }
 .btn-search::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-.btn-search:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
 .btn-search::placeholder {
