@@ -113,12 +113,12 @@ function handleTaglist() {
     const listUstDOM = selectUst.children[1].children[0];
     
     const tagIng = tabTag.Ingredients;
-    const tagApp = tabTag.Appareil;
+    const tagApp = tabTag.Appareils;
     const tagUst = tabTag.Ustensiles;
     
-    tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing))});
-    tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app))});
-    tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust))});
+    tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
+    tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
+    tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
 };
 
 /**
