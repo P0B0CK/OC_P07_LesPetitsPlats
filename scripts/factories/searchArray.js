@@ -1,23 +1,23 @@
 /**
  * SEARCH FILTRED BY ARRAYS METHODS
- * @param {*} tag 
+ * @param {*} value 
  * @param {*} recipes 
- * @returns array of filtred recipes
+ * @returns [filteredRecipes]
  */
 
-export function getFilteredRecipes(tag, recipes){
+export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];
 
 
-    if ( tag.length > 2 ) {
+    if ( value.length > 2 ) {
         recipes.forEach( recipe => {
-            if (recipe.name.toLowerCase().includes(tag.toString().toLowerCase())) {
+            if (recipe.name.toLowerCase().includes(value.toString().toLowerCase())) {
                 filteredRecipes.push(recipe);
-            } else if (recipe.description.toLowerCase().includes(tag.toString().toLowerCase())) {
+            } else if (recipe.description.toLowerCase().includes(value.toString().toLowerCase())) {
                 filteredRecipes.push(recipe);
             } else {
                 recipe.ingredients.forEach( ingredient => {
-                    if (ingredient.ingredient.toLowerCase().includes(tag.toString().toLowerCase())) {
+                    if (ingredient.ingredient.toLowerCase().includes(value.toString().toLowerCase())) {
                         if ( !filteredRecipes.includes(recipe)) {
                             filteredRecipes.push(recipe);
                         };
@@ -26,11 +26,13 @@ export function getFilteredRecipes(tag, recipes){
             };
         });
     }
-    // tag.length <= 2
-    else if (tag.length > 1 && tag.length < 3) {console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');};
+    else {
+        filteredRecipes = recipes;
+        // console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');
+    };
+    
+    console.log('recherché par input');
     console.log(filteredRecipes);
-    console.log("FIND WITH ARRAYS METHODS");
-
     return filteredRecipes;
 }
 
@@ -38,13 +40,14 @@ export function getFilteredRecipes(tag, recipes){
  * SEARCH FILTRED BY TAG WITH ARRAYS METHODS
  * @param {*} tag 
  * @param {*} recipes 
- * @returns array of filtred recipes
+ * @returns [filteredRecipes]
  */
 
 export function getFilteredRecipesByTags(tag, recipes){
     let filteredRecipes = [];
 
     if (tag.type === 'ingredients') {
+
         recipes.forEach( recipe => {
                 recipe.ingredients.forEach( ingredient => {
                     if (ingredient.ingredient.toLowerCase().includes(tag.name.toString().toLowerCase())) {
@@ -55,15 +58,13 @@ export function getFilteredRecipesByTags(tag, recipes){
         })});
 
     } else if (tag.type === 'appareils') {
-        
+
     } else if (tag.type === 'ustensils') {
         
     } else {
 
     }
-    
+    console.log('recherché par tag');
     console.log(filteredRecipes);
-    console.log("FIND WITH ARRAYS METHODS By TAG");
-
     return filteredRecipes;
 }

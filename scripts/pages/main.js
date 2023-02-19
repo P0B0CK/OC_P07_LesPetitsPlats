@@ -1,9 +1,9 @@
 import { datasRecipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
 import { getRecipesTags } from "../factories/datasTags.js";
-import { getSelectorsTags, getTagList } from "../factories/tagSelector.js";
+import { getSelectorsTags, getTagList, selectedTag, cardTag } from "../factories/tagSelector.js";
 
-import { getFilteredRecipes } from "../factories/searchArray.js";
+import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searchArray.js";
 
 
 /**
@@ -11,12 +11,12 @@ import { getFilteredRecipes } from "../factories/searchArray.js";
  * + selector place
  * + tags place (!)
 */
-const searchtag = document.querySelector('#searchtag');
 const tagsSelectors = document.querySelector('.tag-selectors');
 
-const btnSelectDOM = document.querySelectorAll('.btn-select');
-const btnContentDOM = document.querySelectorAll('.btn-content');
-const listContentDOM = document.querySelectorAll('.list-content');
+
+
+
+
 
 
 /**
@@ -57,46 +57,56 @@ searchBar.addEventListener('keyup', (e) => {
     handleRecipes(searchedContent, datasRecipes);
 });
 
+
 // GERER l'affichage des recette SI recherche en cour ::
 function handleRecipes(value) {
-    displayRecipes(datasRecipes);
+    let filteredRecipes = [];
+    console.log('liste des tags : ')*
+    console.log(selectedTag);
 
-    if (value.length > 2) {
-        let filteredRecipes = getFilteredRecipes(value, datasRecipes);
-        displayRecipes(filteredRecipes);
-    }
+    filteredRecipes = getFilteredRecipes(value, datasRecipes);
+
+    selectedTag.forEach(tag => {
+        filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
+    });
+
+    displayRecipes(filteredRecipes);
 };
 
 /**
  * AFFICHER les cartes recettes ::
  * @param {recettes} recipes 
- */
+*/
 function displayRecipes(recipes) {
     const searchresults = document.getElementById('searchresults');
     searchresults.innerHTML = '';
     recipes.map((recipe) => new recipeCard(recipe));
 }
 
+function displayTags(cardTag) {
+
+}
+
 /**
  *  GERER les sélecteurs en fonction de leur clé "nom" ::
  *  AJOUTE l'id correspondant à son selecteur ::
- */
+*/
 function handleSelector() {
     
     tabName.forEach(key => { tagsSelectors.appendChild(new getSelectorsTags(key));});
     
     const btnSelectDOM = document.querySelectorAll('.btn-select');
-
+    
     for (let i = 0 ; i < btnSelectDOM.length ; i++) {
         if ( i == 0) {
             btnSelectDOM[i].setAttribute('id', 'ing-select');
         } if ( i == 1) {
-        btnSelectDOM[i].setAttribute('id', 'app-select');
+            btnSelectDOM[i].setAttribute('id', 'app-select');
         } if ( i == 2) {
             btnSelectDOM[i].setAttribute('id', 'ust-select');
         }
     };
-
+    
 };
 
 
@@ -121,17 +131,26 @@ function handleTaglist() {
     tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
 };
 
-/**
- * 
- */
-function handleSelectorState() {
-}
-
 function init() {
     orderedRecipes = sortRecipes();
     displayRecipes(datasRecipes);
     handleSelector();
     handleTaglist(tabTag);
+    displayTags(cardTag)
 }
 
 init()
+/**
+ * ECOUTER lors de la sélection des tags :: 
+ */
+// const tagSelected = document.querySelectorAll('li.tag-elt');
+// tagSelected.forEach((tag) => {
+//   tag.addEventListener('click', () => {
+//     let typeTag = tag.dataset.type;
+//     let tabTag = tag.dataset.name;
+//     let tagSearched = { type: typeTag, name: tabTag };
+//     console.log(tagSearched);
+//     let filteredRecipes = getFilteredRecipesByTags(tagSearched, datasRecipes);
+//     displayRecipes(filteredRecipes);
+//   });
+// });

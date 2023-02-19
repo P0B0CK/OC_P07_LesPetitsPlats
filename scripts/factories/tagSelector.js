@@ -6,6 +6,8 @@
 import { datasRecipes } from "../../datas/recipes.js";
 import { getFilteredRecipesByTags } from "./searchArray.js";
 
+export let selectedTag = [];
+
 export function getSelectorsTags(tabTag) {
     const btnSelect = document.createElement('div');
         btnSelect.setAttribute('class', 'btn-select');
@@ -54,12 +56,24 @@ export function getTagList(tabTag, typeTag) {
     tagElt.innerHTML = `${tabTag}`;
 
     tagElt.addEventListener('click', () => {
-        let tagSearch = { type : typeTag , name : tabTag };
-
-        getFilteredRecipesByTags(tagSearch, datasRecipes);
-        console.log(tagSearch);
+        let searchedTag = { type : typeTag , name : tabTag };
+        selectedTag.push(searchedTag);
+        console.log(selectedTag)
+        // getFilteredRecipesByTags(searchedTag, datasRecipes);
+        // handleRecipes(searchedTag);
     })
 
     return tagElt;
 };
+
+// function cardTag(tabTag) {
+//     const cardTag = document.createElement('div');
+//         cardTag.setAttribute('class', 'tag-card');
+
+//     cardTag.innerHTML = `<p>${tabTag}</p>`;
+//     cardTag.innerHTML = `<img src="assets/img/btn-close.svg" alt="delete tag"></div>`;
+
+//     return cardTag, console.log(cardTag);
+// }
+
    
