@@ -7,24 +7,37 @@ import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searc
 
 
 /**
- * SECTION SEARCH TAG
- * + selector place
- * + tags place (!)
+ * /////////////////////
+ * /// DOM ELEMENTS ///
+ * ///////////////////
 */
-const tagsSelectors = document.querySelector('.tag-selectors');
 
+const tagsSelectors = document.querySelector('.tag-selectors'); // compartiment des boutons de selections
+const tagsSelected = document.querySelector('.tag-selected'); // compartiment des tags
+const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
 
+/**
+ * /////////////////////
+ * ///// VARIABLE /////
+ * ///////////////////
+*/
 
+let orderedRecipes = []; // Recettes triées
+let tabTag = getRecipesTags(datasRecipes); // Objet contenant les 3 tableaux de tags
 
+const tabName = Object.keys(tabTag); // Noms des 3 tableaux
 
-
+/**
+ * ////////////////////
+ * //// FONCTIONS ////
+ * //////////////////
+*/
 
 /**
  * 
- * @returns Tableau des recettes trié par ordre Alphabétique ::
+ * @returns orderedRecipes
+ * RECETTES triées alphabétiquement
  */
-let orderedRecipes = [];
-
 function sortRecipes() {
     orderedRecipes = datasRecipes.sort((a, b) => {
         if  ( a.name < b.name ) {
@@ -41,30 +54,18 @@ function sortRecipes() {
 };
 
 /**
- * TABLEAU des tags & RECUPERATION des clés des listes::
-*/
-let tabTag = getRecipesTags(datasRecipes);
-const tabName = Object.keys(tabTag);
-
-
-/**
- * ECOUTER lors de la saisie dans la barre de recherche :: 
+ * @type {EventListener} keyup
+ * @param {input}
  */
-const searchBar = document.querySelector('.searchbar');
-
 searchBar.addEventListener('keyup', (e) => {
     const searchedContent = e.target.value;
-    handleRecipes(searchedContent, datasRecipes);
+    handleRecipes(searchedContent, orderedRecipes);
 });
 
-
-// GERER l'affichage des recette SI recherche en cour ::
 function handleRecipes(value) {
     let filteredRecipes = [];
-    console.log('liste des tags : ')*
-    console.log(selectedTag);
 
-    filteredRecipes = getFilteredRecipes(value, datasRecipes);
+    filteredRecipes = getFilteredRecipes(value, orderedRecipes);
 
     selectedTag.forEach(tag => {
         filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
@@ -75,7 +76,7 @@ function handleRecipes(value) {
 
 /**
  * AFFICHER les cartes recettes ::
- * @param {recettes} recipes 
+ * @param {recipes} orderedRecipes
 */
 function displayRecipes(recipes) {
     const searchresults = document.getElementById('searchresults');
@@ -83,8 +84,8 @@ function displayRecipes(recipes) {
     recipes.map((recipe) => new recipeCard(recipe));
 }
 
-function displayTags(cardTag) {
-
+function displayTags() {
+    selectedTag.forEach(tag => tagsSelected.appendChild(new cardTag(tag)))
 }
 
 /**
@@ -109,7 +110,6 @@ function handleSelector() {
     
 };
 
-
 /**
  *  GERER & GENERER pour chaque TYPE de selecteur la liste Correspondante ::
 */
@@ -133,24 +133,10 @@ function handleTaglist() {
 
 function init() {
     orderedRecipes = sortRecipes();
-    displayRecipes(datasRecipes);
+    displayRecipes(orderedRecipes);
     handleSelector();
     handleTaglist(tabTag);
-    displayTags(cardTag)
+    displayTags(cardTag);
 }
 
 init()
-/**
- * ECOUTER lors de la sélection des tags :: 
- */
-// const tagSelected = document.querySelectorAll('li.tag-elt');
-// tagSelected.forEach((tag) => {
-//   tag.addEventListener('click', () => {
-//     let typeTag = tag.dataset.type;
-//     let tabTag = tag.dataset.name;
-//     let tagSearched = { type: typeTag, name: tabTag };
-//     console.log(tagSearched);
-//     let filteredRecipes = getFilteredRecipesByTags(tagSearched, datasRecipes);
-//     displayRecipes(filteredRecipes);
-//   });
-// });

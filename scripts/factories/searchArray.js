@@ -1,13 +1,12 @@
 /**
  * SEARCH FILTRED BY ARRAYS METHODS
- * @param {*} value 
+ * @param {*} value input search bar
  * @param {*} recipes 
  * @returns [filteredRecipes]
  */
 
 export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];
-
 
     if ( value.length > 2 ) {
         recipes.forEach( recipe => {
@@ -31,8 +30,8 @@ export function getFilteredRecipes(value, recipes){
         // console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');
     };
     
-    console.log('recherché par input');
-    console.log(filteredRecipes);
+    // console.log('recherché par input');
+    // console.log(filteredRecipes);
     return filteredRecipes;
 }
 

@@ -58,7 +58,7 @@ export function getTagList(tabTag, typeTag) {
     tagElt.addEventListener('click', () => {
         let searchedTag = { type : typeTag , name : tabTag };
         selectedTag.push(searchedTag);
-        console.log(selectedTag)
+        console.log(selectedTag); 
         // getFilteredRecipesByTags(searchedTag, datasRecipes);
         // handleRecipes(searchedTag);
     })
@@ -66,14 +66,14 @@ export function getTagList(tabTag, typeTag) {
     return tagElt;
 };
 
-// function cardTag(tabTag) {
-//     const cardTag = document.createElement('div');
-//         cardTag.setAttribute('class', 'tag-card');
+export function cardTag(tabTag) {
+    const cardTag = document.createElement('div');
+        cardTag.setAttribute('class', 'tag-card');
 
-//     cardTag.innerHTML = `<p>${tabTag}</p>`;
-//     cardTag.innerHTML = `<img src="assets/img/btn-close.svg" alt="delete tag"></div>`;
+    cardTag.innerHTML = `<p>${tabTag}</p>`;
+    cardTag.innerHTML = `<img src="assets/img/btn-close.svg" alt="delete tag"></div>`;
 
-//     return cardTag, console.log(cardTag);
-// }
+    return cardTag;
+}
 
    

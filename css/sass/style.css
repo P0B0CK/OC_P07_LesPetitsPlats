@@ -256,7 +256,7 @@ input .btn-search {
   margin-top: 15px;
 }
 
-.tag {
+.tag-card {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -273,7 +273,7 @@ input .btn-search {
   text-align: center;
   line-height: 16.8px;
 }
-.tag img {
+.tag-card img {
   width: 20px;
   margin-left: 13px;
 }
