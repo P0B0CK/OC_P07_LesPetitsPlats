@@ -12,7 +12,7 @@ body {
     width: 90%;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    justify-content: space-bmarginetween;
     align-items: center;
     margin-top: 17px; margin-bottom: 17px;
 }
@@ -23,7 +23,10 @@ main, header{
     justify-content: center;
 }
 
-div.tag-selected {
+div.tags-selected-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 16.5px;
     margin-top: 15px;
 }
 
@@ -276,25 +279,32 @@ input .btn-search {
 }
 
 .tag-card {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
     width: 107px;
     height: 37px;
+    
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px;
     border-radius: 5px;
     background-color: #3282F7; // a changer en fonction du style de tag
     font-family: 'Lato', 'Roboto', sans-serif;
     color: rgba(white, 1);
     font-size: 14px;
     font-weight: 700;
-    text-align: center;
     line-height: 16.8px;
+    text-align: center;
     img {
         width: 20px;
         margin-left: 13px;
     }
+}
+
+.thumb-textbox-size {
+    width: 74px;
+    max-height: 45px;
+    overflow: hidden;
 }
 
 #searchresults {

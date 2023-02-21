@@ -1,7 +1,7 @@
 import { datasRecipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
 import { getRecipesTags } from "../factories/datasTags.js";
-import { getSelectorsTags, getTagList, selectedTag, cardTag } from "../factories/tagSelector.js";
+import { getSelectorsTags, getTagList, selectedTags, tagThumbnail } from "../factories/tagSelector.js";
 
 import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searchArray.js";
 
@@ -13,7 +13,7 @@ import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searc
 */
 
 const tagsSelectors = document.querySelector('.tag-selectors'); // compartiment des boutons de selections
-const tagsSelected = document.querySelector('.tag-selected'); // compartiment des tags
+const tagsSelectedContainer = document.querySelector('.tags-selected-container'); // compartiment des cartes des tags
 const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
 
 /**
@@ -62,12 +62,18 @@ searchBar.addEventListener('keyup', (e) => {
     handleRecipes(searchedContent, orderedRecipes);
 });
 
+/**
+ * 
+ * @param {input} value
+ * @param {tag} def
+ * 
+ */
 function handleRecipes(value) {
     let filteredRecipes = [];
 
     filteredRecipes = getFilteredRecipes(value, orderedRecipes);
 
-    selectedTag.forEach(tag => {
+    selectedTags.forEach(tag => {
         filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
     });
 
@@ -84,8 +90,13 @@ function displayRecipes(recipes) {
     recipes.map((recipe) => new recipeCard(recipe));
 }
 
-function displayTags() {
-    selectedTag.forEach(tag => tagsSelected.appendChild(new cardTag(tag)))
+export function displayTags() {
+    tagsSelectedContainer.innerHTML = ''; // Annule les doublons => vide le contenu précédent de l'élément
+    
+    selectedTags.forEach(tag => {
+      const card = tagThumbnail(tag.name); // crée une carte pour le tag donné
+      tagsSelectedContainer.appendChild(card); // ajoute la carte à l'élément cible
+    });
 }
 
 /**
@@ -136,7 +147,7 @@ function init() {
     displayRecipes(orderedRecipes);
     handleSelector();
     handleTaglist(tabTag);
-    displayTags(cardTag);
+    displayTags(selectedTags);
 }
 
 init()

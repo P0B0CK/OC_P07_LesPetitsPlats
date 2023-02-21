@@ -4,30 +4,31 @@
  */
 
 import { datasRecipes } from "../../datas/recipes.js";
+import { displayTags } from "../pages/main.js";
 import { getFilteredRecipesByTags } from "./searchArray.js";
 
-export let selectedTag = [];
+export let selectedTags = [];
 
 export function getSelectorsTags(tabTag) {
     const btnSelect = document.createElement('div');
-        btnSelect.setAttribute('class', 'btn-select');
-        
-        const btnContent = document.createElement('div');
-            btnContent.setAttribute('class', 'btn-content');
-
-            btnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
-
-        const btnArrow = document.createElement('div');
-            btnArrow.setAttribute('class', 'btn-arrow');
-
-            btnArrow.innerHTML = `<img 
-                src="../assets/img/btn-arrow.svg" 
-                alt="flèche"
-                class="btn-arrowUp">
-            `;
-            
+    btnSelect.setAttribute('class', 'btn-select');
+    
+    const btnContent = document.createElement('div');
+    btnContent.setAttribute('class', 'btn-content');
+    
+    btnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
+    
+    const btnArrow = document.createElement('div');
+    btnArrow.setAttribute('class', 'btn-arrow');
+    
+    btnArrow.innerHTML = `<img 
+    src="../assets/img/btn-arrow.svg" 
+    alt="flèche"
+    class="btn-arrowUp">
+    `;
+    
             btnContent.appendChild(btnArrow);
-
+            
             
             const listContainer =  document.createElement('div');
             listContainer.setAttribute('class', 'list-container hide');
@@ -44,36 +45,35 @@ export function getSelectorsTags(tabTag) {
                 btnSelect.classList.add("btn-select-active");
                 listContainer.classList.remove('hide');
             })
-
+            
             return btnSelect;
-        };
-     
-
+};
+        
+        
 export function getTagList(tabTag, typeTag) {
-
+            
     const tagElt = document.createElement('li');
-        tagElt.setAttribute('class', 'tag-elt');
+    tagElt.setAttribute('class', 'tag-elt');
     tagElt.innerHTML = `${tabTag}`;
-
+            
     tagElt.addEventListener('click', () => {
         let searchedTag = { type : typeTag , name : tabTag };
-        selectedTag.push(searchedTag);
-        console.log(selectedTag); 
-        // getFilteredRecipesByTags(searchedTag, datasRecipes);
-        // handleRecipes(searchedTag);
+        
+        selectedTags.push(searchedTag);
+        displayTags();
     })
-
+    
     return tagElt;
 };
 
-export function cardTag(tabTag) {
-    const cardTag = document.createElement('div');
-        cardTag.setAttribute('class', 'tag-card');
+export function tagThumbnail(tabTag) {
+    const tagCard = document.createElement('div');
+    tagCard.setAttribute('class', 'tag-card');
 
-    cardTag.innerHTML = `<p>${tabTag}</p>`;
-    cardTag.innerHTML = `<img src="assets/img/btn-close.svg" alt="delete tag"></div>`;
+    tagCard.innerHTML = `<div class="thumb-textbox-size"><p>${tabTag}</p><div>
+        <div class="cross"><img src="assets/img/btn-close.svg" alt="delete tag"></div>`;
 
-    return cardTag;
+    return tagCard;
 }
 
-   
+console.log(selectedTags)
