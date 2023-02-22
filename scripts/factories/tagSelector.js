@@ -69,11 +69,40 @@ export function getTagList(tabTag, typeTag) {
 export function tagThumbnail(tabTag) {
     const tagCard = document.createElement('div');
     tagCard.setAttribute('class', 'tag-card');
-
-    tagCard.innerHTML = `<div class="thumb-textbox-size"><p>${tabTag}</p><div>
-        <div class="cross"><img src="assets/img/btn-close.svg" alt="delete tag"></div>`;
+    
+    tagCard.innerHTML = `
+        <div class="thumb-textbox-size">
+            <p>${tabTag}</p>
+        </div>
+        <div class="thumb-cross">
+            <img src="assets/img/btn-close.svg" alt="delete tag">
+        </div>`;
+    
+    const closeCross = tagCard.querySelector('.thumb-cross');
+    
+    closeCross.addEventListener('click', () => removeTagThumb());
 
     return tagCard;
+};
+
+
+
+function removeTagThumb(tabTag) {
+    console.log(selectedTags)
+    // Supprimer le tag dans le tableau des tags sélectionnés
+    const index = selectedTags.findIndex(tag => tag.name === tabTag);
+    if (index !== -1) {
+        selectedTags.splice(index, 1);
+    }
+    // Supprimer le tag visuellement
+    const tagCards = document.querySelectorAll('.tag-card');
+    for (let i = 0; i < tagCards.length; i++) {
+        const tagCard = tagCards[i];
+        if (tagCard.querySelector('p').textContent === tabTag) {
+            tagCard.parentNode.removeChild(tagCard);
+            break; // on sort de la boucle après la suppression du premier élément trouvé
+        }
+    }
 }
 
 console.log(selectedTags)

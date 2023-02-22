@@ -303,8 +303,9 @@ input .btn-search {
 
 .thumb-textbox-size {
     width: 74px;
-    max-height: 45px;
+    max-height: 36px;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #searchresults {
