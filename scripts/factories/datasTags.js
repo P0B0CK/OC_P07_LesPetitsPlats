@@ -1,42 +1,51 @@
 /**
  * 
- * @param {datas tags array} recipes
- * @returns array content datas from tags
+ * @param {array} datasRecipes - tableau des recettes
+ * @returns {object} - un objet contenant les données de tags pour les ingrédients, les appareils et les ustensiles.
  */
 
-export function getRecipesTags(recipes) {
+export function getTagsDatas(recipes) {
     // Nouveaux tableaux sans doublon d'élément
     // Récupère les tags
-    const datasTags = { Ingredients : [] , Appareils: [] , Ustensiles : [] };
+    const tagsDatas = { Ingredients : [] , Appareils: [] , Ustensiles : [] };
 
-    
-    // Dans le tableau des recettes ( pour CHAQUE recette )
+    // Parcourir les recettes
     recipes.forEach( recipe => {
-        // SI ( l'appareil N'EST PAS DEJA inclu dans la liste des appareils des recettes)
-        // ALORS l'appareil est AJOUTE au tableau des TAGS
-        if ( ! datasTags.Appareils.includes(recipe.appliance)) {
-            return datasTags.Appareils.push(recipe.appliance);
+        // Ajouter l'appareil au tableau des appareils si il n'est pas déjà inclu
+        if (!tagsDatas.Appareils.includes(recipe.appliance)) {
+            const formattedAppliance = formatTag(recipe.appliance);
+            if (!tagsDatas.Appareils.includes(formattedAppliance)) {
+                tagsDatas.Appareils.push(formattedAppliance);
+            }
         }
-        
-        // Popur CHAQUE ingrédient du tableau
-        // SI ( l'ingrédient N'EST PAS DEJA inclu dans la liste des ingrédients des recettes)
-        // ALORS l'ingrédient est AJOUTE au tableau des TAGS
+
+        // Ajouter chaque ingrédient au tableau des ingrédients si il n'est pas déjà inclu
         recipe.ingredients.forEach( ing => {
-            if ( ! datasTags.Ingredients.includes(ing.ingredient)) {
-                return datasTags.Ingredients.push(ing.ingredient);
-            };
+            const formattedIngredient = formatTag(ing.ingredient);
+            if (!tagsDatas.Ingredients.includes(formattedIngredient)) {
+                tagsDatas.Ingredients.push(formattedIngredient);
+            }
         });
-        
-        // Pour CHAQUE ustensile du tableau
-        // SI ( l'ustensile N'EST PAS DEJA inclu dans la liste des ustensiles des recettes)
-        // ALORS l'ustensile est AJOUTE au tableau des TAGS
+
+        // Ajouter chaque ustensile au tableau des ustensiles si il n'est pas déjà inclu
         recipe.ustensils.forEach( ust => {
-            if ( ! datasTags.Ustensiles.includes(ust)) {
-                return datasTags.Ustensiles.push(ust);
-                
-            };
+            const formattedUtensil = formatTag(ust);
+            if (!tagsDatas.Ustensiles.includes(formattedUtensil)) {
+                tagsDatas.Ustensiles.push(formattedUtensil);
+            }
         });
     });
-    return datasTags;
+
+    return tagsDatas;
 };
 
+/**
+ * Formatte une chaîne de caractères pour mettre en majuscule la première lettre et en minuscules les autres lettres, et supprime la lettre "s" à la fin si elle est présente.
+ * 
+ * @param {string} tag - La chaîne de caractères à formater.
+ * @returns {string} - La chaîne de caractères formatée.
+ */
+function formatTag(tag) {
+    const formattedTag = tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase();
+    return formattedTag.endsWith("s") ? formattedTag.slice(0, -1) : formattedTag;
+}

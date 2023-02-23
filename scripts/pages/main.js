@@ -1,6 +1,6 @@
 import { datasRecipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
-import { getRecipesTags } from "../factories/datasTags.js";
+import { getTagsDatas } from "../factories/datasTags.js";
 import { getSelectorsTags, getTagList, selectedTags, tagThumbnail } from "../factories/tagSelector.js";
 
 import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searchArray.js";
@@ -23,9 +23,10 @@ const searchBar = document.querySelector('.searchbar'); // Barre de recherche pr
 */
 
 let orderedRecipes = []; // Recettes triées
-let tabTag = getRecipesTags(datasRecipes); // Objet contenant les 3 tableaux de tags
 
-const tabName = Object.keys(tabTag); // Noms des 3 tableaux
+let tagsDatas = getTagsDatas(datasRecipes); // Objet contenant les 3 tableaux de tags :: [datasTags]
+
+const tagsDatasKeysName = Object.keys(tagsDatas); // Noms des 3 tableaux
 
 /**
  * ////////////////////
@@ -52,6 +53,26 @@ function sortRecipes() {
     });
     return orderedRecipes;
 };
+
+// /**
+//  * 
+//  * @returns orderedTags
+//  * Tags triés alphabétiquement
+//  */
+// function sortTags() {
+//     orderedTags = tagsDatas.sort((a, b) => {
+//         if  ( a.name < b.name ) {
+//             return -1;
+//         }
+//         if ( a.name > b.name ) {
+//             return 1;
+//         }
+//         else {
+//             return 0
+//         }
+//     });
+//     return orderedTags;
+// };
 
 /**
  * @type {EventListener} keyup
@@ -105,7 +126,7 @@ export function displayTags() {
 */
 function handleSelector() {
     
-    tabName.forEach(key => { tagsSelectors.appendChild(new getSelectorsTags(key));});
+    tagsDatasKeysName.forEach(key => { tagsSelectors.appendChild(new getSelectorsTags(key));});
     
     const btnSelectDOM = document.querySelectorAll('.btn-select');
     
@@ -133,9 +154,9 @@ function handleTaglist() {
     const listAppDOM = selectApp.children[1].children[0];
     const listUstDOM = selectUst.children[1].children[0];
     
-    const tagIng = tabTag.Ingredients;
-    const tagApp = tabTag.Appareils;
-    const tagUst = tabTag.Ustensiles;
+    const tagIng = tagsDatas.Ingredients;
+    const tagApp = tagsDatas.Appareils;
+    const tagUst = tagsDatas.Ustensiles;
     
     tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
     tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
@@ -144,9 +165,10 @@ function handleTaglist() {
 
 function init() {
     orderedRecipes = sortRecipes();
+    // orderedTags = sortTags();
     displayRecipes(orderedRecipes);
     handleSelector();
-    handleTaglist(tabTag);
+    handleTaglist(tagsDatas);
     displayTags(selectedTags);
 }
 
