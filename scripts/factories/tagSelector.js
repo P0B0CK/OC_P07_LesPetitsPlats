@@ -58,8 +58,12 @@ export function getTagList(tabTag, typeTag) {
             
     tagElt.addEventListener('click', () => {
         let searchedTag = { type : typeTag , name : tabTag };
+
+        let alreadyInSelectedTags = selectedTags.find(tag => tag.type === searchedTag.type && tag.name === searchedTag.name)
         
-        selectedTags.push(searchedTag);
+        if (!alreadyInSelectedTags) {
+            selectedTags.push(searchedTag);
+        }
         displayTags();
     })
     
@@ -80,29 +84,23 @@ export function tagThumbnail(tabTag) {
     
     const closeCross = tagCard.querySelector('.thumb-cross');
     
-    closeCross.addEventListener('click', () => removeTagThumb());
+    closeCross.addEventListener('click', (tagToRemove) => removeTagThumb(tagToRemove));
 
     return tagCard;
 };
 
 
 
-function removeTagThumb(tabTag) {
-    console.log(selectedTags)
-    // Supprimer le tag dans le tableau des tags sélectionnés
-    const index = selectedTags.findIndex(tag => tag.name === tabTag);
+// Fonction pour supprimer un tag du tableau "selectedTags"
+function removeTagThumb(tagToRemove) {
+    let index = selectedTags.findIndex(tag => tag.type === tagToRemove.type && tag.name === tagToRemove.name);
+    console.log(index)
     if (index !== -1) {
         selectedTags.splice(index, 1);
+        displayTags();
+        console.log(selectedTags);
     }
-    // Supprimer le tag visuellement
-    const tagCards = document.querySelectorAll('.tag-card');
-    for (let i = 0; i < tagCards.length; i++) {
-        const tagCard = tagCards[i];
-        if (tagCard.querySelector('p').textContent === tabTag) {
-            tagCard.parentNode.removeChild(tagCard);
-            break; // on sort de la boucle après la suppression du premier élément trouvé
-        }
-    }
+    console.log(selectedTags);
 }
 
 console.log(selectedTags)
