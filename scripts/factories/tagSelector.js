@@ -3,11 +3,22 @@
  * @param {object btn tags selectors} tabTag
  */
 
-import { datasRecipes } from "../../datas/recipes.js";
 import { displayTags } from "../pages/main.js";
-import { getFilteredRecipesByTags } from "./searchArray.js";
+
+/**
+ * /////////////////////
+ * ///// VARIABLE /////
+ * ///////////////////
+*/
 
 export let selectedTags = [];
+
+/**
+ * ////////////////////
+ * //// FONCTIONS ////
+ * //////////////////
+*/
+
 
 export function getSelectorsTags(tabTag) {
     const btnSelect = document.createElement('div');
@@ -49,7 +60,12 @@ export function getSelectorsTags(tabTag) {
             return btnSelect;
 };
         
-        
+/**
+ * 
+ * @param {name} tabTag 
+ * @param {type} typeTag 
+ * @returns Element : <li>TAG</li>
+ */        
 export function getTagList(tabTag, typeTag) {
             
     const tagElt = document.createElement('li');
@@ -70,6 +86,11 @@ export function getTagList(tabTag, typeTag) {
     return tagElt;
 };
 
+/**
+ * 
+ * @param {elt} tabTag 
+ * @returns Element : vignette du Tag
+ */
 export function tagThumbnail(tabTag) {
     const tagCard = document.createElement('div');
     tagCard.setAttribute('class', 'tag-card');
@@ -89,7 +110,10 @@ export function tagThumbnail(tabTag) {
     return tagCard;
 };
 
-
+/**
+ * 
+ * @param {objet} tagToRemove 
+ */
 function removeTagThumb(tagToRemove) {
     let index = selectedTags.findIndex(tag => tag.type === tagToRemove.type && tag.name === tagToRemove.name);
     
@@ -97,5 +121,3 @@ function removeTagThumb(tagToRemove) {
     
     displayTags();
 }
-
-console.log(selectedTags)
