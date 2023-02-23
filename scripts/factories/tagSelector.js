@@ -90,17 +90,12 @@ export function tagThumbnail(tabTag) {
 };
 
 
-
-// Fonction pour supprimer un tag du tableau "selectedTags"
 function removeTagThumb(tagToRemove) {
     let index = selectedTags.findIndex(tag => tag.type === tagToRemove.type && tag.name === tagToRemove.name);
-    console.log(index)
-    if (index !== -1) {
-        selectedTags.splice(index, 1);
-        displayTags();
-        console.log(selectedTags);
-    }
-    console.log(selectedTags);
+    
+    selectedTags.splice(index, 1);
+    
+    displayTags();
 }
 
 console.log(selectedTags)
