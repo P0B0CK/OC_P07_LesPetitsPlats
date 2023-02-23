@@ -3,7 +3,7 @@
  * @param {object btn tags selectors} tabTag
  */
 
-import { displayTags } from "../pages/main.js";
+import { displayTags, handleRecipes } from "../pages/main.js";
 
 /**
  * /////////////////////
@@ -81,6 +81,7 @@ export function getTagList(tabTag, typeTag) {
             selectedTags.push(searchedTag);
         }
         displayTags();
+        handleRecipes();
     })
     
     return tagElt;
@@ -120,4 +121,5 @@ function removeTagThumb(tagToRemove) {
     selectedTags.splice(index, 1);
     
     displayTags();
+    handleRecipes();
 }

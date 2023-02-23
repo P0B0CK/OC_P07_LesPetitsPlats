@@ -79,8 +79,8 @@ function sortRecipes() {
  * @param {input}
  */
 searchBar.addEventListener('keyup', (e) => {
-    const searchedContent = e.target.value;
-    handleRecipes(searchedContent, orderedRecipes);
+    // handleRecipes(searchedContent);
+    handleRecipes();
 });
 
 /**
@@ -88,17 +88,24 @@ searchBar.addEventListener('keyup', (e) => {
  * @param {input} value
  * @param {tag} def
  * 
- */
-function handleRecipes(value) {
+*/
+export function handleRecipes() {
+    
+    const searchedContent = searchBar.value;
+    console.log(searchBar.value)
     let filteredRecipes = [];
 
-    filteredRecipes = getFilteredRecipes(value, orderedRecipes);
-
+    filteredRecipes = getFilteredRecipes(searchedContent, orderedRecipes);
+    console.log(filteredRecipes)
+    console.log(selectedTags)
     selectedTags.forEach(tag => {
         filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
     });
 
     displayRecipes(filteredRecipes);
+    
+    let tagData = getTagsDatas(filteredRecipes);
+    handleTaglist(tagData);
 };
 
 /**
@@ -145,7 +152,7 @@ function handleSelector() {
 /**
  *  GERER & GENERER pour chaque TYPE de selecteur la liste Correspondante ::
 */
-function handleTaglist() {
+function handleTaglist(datas) {
     const selectIng = document.querySelector('#ing-select');
     const selectApp = document.querySelector('#app-select');
     const selectUst = document.querySelector('#ust-select');
@@ -154,10 +161,12 @@ function handleTaglist() {
     const listAppDOM = selectApp.children[1].children[0];
     const listUstDOM = selectUst.children[1].children[0];
     
-    const tagIng = tagsDatas.Ingredients;
-    const tagApp = tagsDatas.Appareils;
-    const tagUst = tagsDatas.Ustensiles;
-    
+    const tagIng = datas.Ingredients;
+    const tagApp = datas.Appareils;
+    const tagUst = datas.Ustensiles;
+    listIngDOM.innerHTML = '';
+    listAppDOM.innerHTML = '';
+    listUstDOM.innerHTML = '';
     tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
     tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
     tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
