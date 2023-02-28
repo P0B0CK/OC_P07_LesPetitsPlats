@@ -92,12 +92,10 @@ searchBar.addEventListener('keyup', (e) => {
 export function handleRecipes() {
     
     const searchedContent = searchBar.value;
-    console.log(searchBar.value)
     let filteredRecipes = [];
 
     filteredRecipes = getFilteredRecipes(searchedContent, orderedRecipes);
-    console.log(filteredRecipes)
-    console.log(selectedTags)
+
     selectedTags.forEach(tag => {
         filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
     });
@@ -124,6 +122,14 @@ export function displayTags() {
     selectedTags.forEach(tag => {
       const card = tagThumbnail(tag.name); // crée une carte pour le tag donné
       tagsSelectedContainer.appendChild(card); // ajoute la carte à l'élément cible
+
+      if (tag.type === 'ingredients') {
+            card.classList.add('color-ing');
+        } else if (tag.type === 'appareils') {
+            card.classList.add('color-app');
+        } else if (tag.type === 'ustensils') {
+            card.classList.add('color-ust');
+        }
     });
 }
 

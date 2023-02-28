@@ -268,7 +268,7 @@ input .btn-search {
   align-items: center;
   padding: 8px;
   border-radius: 5px;
-  background-color: #3282F7;
+  background-color: #C7BEBE;
   font-family: "Lato", "Roboto", sans-serif;
   color: white;
   font-size: 14px;
@@ -279,6 +279,18 @@ input .btn-search {
 .tag-card img {
   width: 20px;
   margin-left: 13px;
+}
+
+.color-ing {
+  background-color: #3282F7;
+}
+
+.color-app {
+  background-color: #68D9A4;
+}
+
+.color-ust {
+  background-color: #ED6454;
 }
 
 .thumb-textbox-size {

@@ -48,8 +48,8 @@ export function getFilteredRecipesByTags(tag, recipes){
     if (tag.type === 'ingredients') {
 
         recipes.forEach( recipe => {
-                recipe.ingredients.forEach( ingredient => {
-                    if (ingredient.ingredient.toLowerCase().includes(tag.name.toString().toLowerCase())) {
+            recipe.ingredients.forEach( ingredient => {
+                if (ingredient.ingredient.toLowerCase().includes(tag.name.toString().toLowerCase())) {
                         if ( !filteredRecipes.includes(recipe)) {
                             filteredRecipes.push(recipe);
                         };
@@ -57,13 +57,22 @@ export function getFilteredRecipesByTags(tag, recipes){
         })});
 
     } else if (tag.type === 'appareils') {
-
+        recipes.forEach( recipe => {  
+            if (recipe.appliance.toLowerCase().includes(tag.name.toString().toLowerCase())) {
+                filteredRecipes.push(recipe);
+        };  
+            });
     } else if (tag.type === 'ustensils') {
-        
-    } else {
-
-    }
-    console.log('recherché par tag');
-    console.log(filteredRecipes);
+        recipes.forEach( recipe => {
+            recipe.ustensils.forEach( ustensile => {
+                if (ustensile.toLowerCase().includes(tag.name.toString().toLowerCase())) {
+                    if ( !filteredRecipes.includes(recipe)) {
+                        filteredRecipes.push(recipe);
+                    };
+                };
+    })});
+    } 
+    // console.log('recherché par tag');
+    // console.log(filteredRecipes);
     return filteredRecipes;
 }

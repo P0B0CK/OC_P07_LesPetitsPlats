@@ -47,5 +47,5 @@ export function getTagsDatas(recipes) {
  */
 function formatTag(tag) {
     const formattedTag = tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase();
-    return formattedTag.endsWith("s") ? formattedTag.slice(0, -1) : formattedTag;
+    return formattedTag;
 }

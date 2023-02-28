@@ -80,6 +80,7 @@ export function getTagList(tabTag, typeTag) {
         if (!alreadyInSelectedTags) {
             selectedTags.push(searchedTag);
         }
+
         displayTags();
         handleRecipes();
     })
@@ -94,7 +95,7 @@ export function getTagList(tabTag, typeTag) {
  */
 export function tagThumbnail(tabTag) {
     const tagCard = document.createElement('div');
-    tagCard.setAttribute('class', 'tag-card');
+    tagCard.classList.add('tag-card');
     
     tagCard.innerHTML = `
         <div class="thumb-textbox-size">
@@ -107,7 +108,7 @@ export function tagThumbnail(tabTag) {
     const closeCross = tagCard.querySelector('.thumb-cross');
     
     closeCross.addEventListener('click', (tagToRemove) => removeTagThumb(tagToRemove));
-
+    
     return tagCard;
 };
 
