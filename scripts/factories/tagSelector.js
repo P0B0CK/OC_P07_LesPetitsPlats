@@ -63,16 +63,21 @@ export function getSelectorsTags(tabTag) {
                     `;
                 btnContent.appendChild(btnArrow);
 
-                    // Arrête la propagation de l'événement pour éviter la fermeture du champ de recherche lors de la saisie de texte.
+                    // Arrête la propagation de l'événement.
                     const inputSearch = btnContent.querySelector('.btn-search');
                     inputSearch.addEventListener('click', (e) => {
                         e.stopPropagation();
                     });
             });
 
-            // Lorsqu'un clic est détecté en dehors du bouton de sélection et de son menu déroulant :
+            // lorsque l'utilisateur clic en dehors du sélcteur :
             document.addEventListener('click', (e) => {
-            if (!btnSelect.contains(e.target)) { // Vérifie si l'élément cliqué est à l'intérieur du bouton de sélection et de son menu déroulant
+            if (!btnSelect.contains(e.target)) {
+                btnSelect.classList.remove("btn-select-active");
+                listContainer.classList.add('hide');
+                btnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
+                btnArrow.innerHTML = `<img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">`;
+                btnContent.appendChild(btnArrow);
             }
     });
             
