@@ -1,3 +1,7 @@
+/**
+ * CREATE RECIPE'S CARD
+ * @param {datas} recipes 
+ */
 export function recipeCard(recipes) {
 
     const { id, name, servings, ingredients, time, description, appliance, ustensils } = recipes;
@@ -40,6 +44,3 @@ export function recipeCard(recipes) {
         ingredients.map( elt => tabIngredient.push(elt.ingredient));
     }
 }
-
-
-

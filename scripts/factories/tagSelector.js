@@ -52,10 +52,22 @@ export function getSelectorsTags(tabTag) {
             
             // Lorsque le bouton select est actif : 
             btnSelect.addEventListener('click', (e) => {
-                btnContent.innerHTML = `<input type="text" class='btn-search' placeholder="Recherche un ${tabTag.slice(0, -1).toLowerCase()}">`;
+                btnContent.innerHTML = `<div class="btn-searchByName"><input type="text" class='btn-search' placeholder="Recherche un ${tabTag.slice(0, -1).toLowerCase()}"></div>`;
                 btnSelect.classList.add("btn-select-active");
                 listContainer.classList.remove('hide');
-            })
+                btnArrow.innerHTML = `<img 
+                    src="../assets/img/btn-arrow.svg" 
+                    alt="flèche"
+                    class="btn-arrowDown">
+                    `;
+                btnContent.appendChild(btnArrow);
+            });
+
+            // Lorsqu'un clic est détecté en dehors du bouton de sélection et de son menu déroulant :
+            document.addEventListener('click', (e) => {
+            if (!btnSelect.contains(e.target)) { // Vérifie si l'élément cliqué est à l'intérieur du bouton de sélection et de son menu déroulant
+            }
+    });
             
             return btnSelect;
 };

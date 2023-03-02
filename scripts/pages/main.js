@@ -14,8 +14,9 @@ import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searc
 
 const tagsSelectors = document.querySelector('.tag-selectors'); // compartiment des boutons de selections
 const tagsSelectedContainer = document.querySelector('.tags-selected-container'); // compartiment des cartes des tags
-const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
+const tagsSearchBar = document.querySelectorAll('input.btn-search');
 
+const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
 /**
  * /////////////////////
  * ///// VARIABLE /////
