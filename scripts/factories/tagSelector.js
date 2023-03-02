@@ -51,8 +51,9 @@ export function getSelectorsTags(tabTag) {
             btnSelect.appendChild(listContainer);
             
             // Lorsque le bouton select est actif : 
-            btnSelect.addEventListener('click', (e) => {
-                btnContent.innerHTML = `<div class="btn-searchByName"><input type="text" class='btn-search' placeholder="Recherche un ${tabTag.slice(0, -1).toLowerCase()}"></div>`;
+            btnSelect.addEventListener('mousedown', (e) => {
+                btnContent.innerHTML = `<div class="btn-select-search">
+                        <input type="text" class='btn-search' placeholder="Recherche un ${tabTag.slice(0, -1).toLowerCase()}"></div>`;
                 btnSelect.classList.add("btn-select-active");
                 listContainer.classList.remove('hide');
                 btnArrow.innerHTML = `<img 
@@ -61,6 +62,12 @@ export function getSelectorsTags(tabTag) {
                     class="btn-arrowDown">
                     `;
                 btnContent.appendChild(btnArrow);
+
+                    // Arrête la propagation de l'événement pour éviter la fermeture du champ de recherche lors de la saisie de texte.
+                    const inputSearch = btnContent.querySelector('.btn-search');
+                    inputSearch.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
             });
 
             // Lorsqu'un clic est détecté en dehors du bouton de sélection et de son menu déroulant :

@@ -14,9 +14,9 @@ import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searc
 
 const tagsSelectors = document.querySelector('.tag-selectors'); // compartiment des boutons de selections
 const tagsSelectedContainer = document.querySelector('.tags-selected-container'); // compartiment des cartes des tags
-const tagsSearchBar = document.querySelectorAll('input.btn-search');
 
 const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
+const inputSearch = document.querySelector('.btn-search'); // Barre de recherche secondaire (selecteurs)
 /**
  * /////////////////////
  * ///// VARIABLE /////
@@ -55,32 +55,11 @@ function sortRecipes() {
     return orderedRecipes;
 };
 
-// /**
-//  * 
-//  * @returns orderedTags
-//  * Tags triés alphabétiquement
-//  */
-// function sortTags() {
-//     orderedTags = tagsDatas.sort((a, b) => {
-//         if  ( a.name < b.name ) {
-//             return -1;
-//         }
-//         if ( a.name > b.name ) {
-//             return 1;
-//         }
-//         else {
-//             return 0
-//         }
-//     });
-//     return orderedTags;
-// };
-
 /**
  * @type {EventListener} keyup
  * @param {input}
  */
 searchBar.addEventListener('keyup', (e) => {
-    // handleRecipes(searchedContent);
     handleRecipes();
 });
 
@@ -93,9 +72,12 @@ searchBar.addEventListener('keyup', (e) => {
 export function handleRecipes() {
     
     const searchedContent = searchBar.value;
+
     let filteredRecipes = [];
+    
 
     filteredRecipes = getFilteredRecipes(searchedContent, orderedRecipes);
+    
 
     selectedTags.forEach(tag => {
         filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
@@ -181,7 +163,6 @@ function handleTaglist(datas) {
 
 function init() {
     orderedRecipes = sortRecipes();
-    // orderedTags = sortTags();
     displayRecipes(orderedRecipes);
     handleSelector();
     handleTaglist(tagsDatas);
