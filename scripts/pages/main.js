@@ -16,7 +16,24 @@ const tagsSelectors = document.querySelector('.tag-selectors'); // compartiment 
 const tagsSelectedContainer = document.querySelector('.tags-selected-container'); // compartiment des cartes des tags
 
 const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
-const inputSearch = document.querySelector('.btn-search'); // Barre de recherche secondaire (selecteurs)
+
+/**
+ * 
+ */
+
+// const inputSearch = document.querySelector('input.btn-search'); // Barre de recherche secondaire (selecteurs)
+
+// inputSearch.addEventListener('input', (e) => {
+//     const searchValue = e.target.value;
+//     console.log(searchValue);
+// });
+
+/**
+ * 
+ */
+
+
+
 /**
  * /////////////////////
  * ///// VARIABLE /////
@@ -70,7 +87,6 @@ searchBar.addEventListener('keyup', (e) => {
  * 
 */
 export function handleRecipes() {
-    
     const searchedContent = searchBar.value;
 
     let filteredRecipes = [];

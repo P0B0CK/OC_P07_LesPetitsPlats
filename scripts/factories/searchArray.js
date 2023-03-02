@@ -30,8 +30,6 @@ export function getFilteredRecipes(value, recipes){
         // console.log('Aucune recherche ne correspond à votre critère... vous pouvez chercher " tarte aux pommes ", " poisson ", etc.');
     };
     
-    // console.log('recherché par input');
-    // console.log(filteredRecipes);
     return filteredRecipes;
 }
 
@@ -71,8 +69,7 @@ export function getFilteredRecipesByTags(tag, recipes){
                     };
                 };
     })});
-    } 
-    // console.log('recherché par tag');
-    // console.log(filteredRecipes);
+    }
+
     return filteredRecipes;
 }

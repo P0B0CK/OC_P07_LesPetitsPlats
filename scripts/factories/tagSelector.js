@@ -68,6 +68,13 @@ export function getSelectorsTags(tabTag) {
                     inputSearch.addEventListener('click', (e) => {
                         e.stopPropagation();
                     });
+
+                    // const inputSearch = document.querySelector('input.btn-search'); // Barre de recherche secondaire (selecteurs)
+
+                    inputSearch.addEventListener('keyup', (e) => {
+                        const searchValue = e.target.value;
+                        console.log(searchValue);
+                    });
             });
 
             // lorsque l'utilisateur clic en dehors du sélcteur :
