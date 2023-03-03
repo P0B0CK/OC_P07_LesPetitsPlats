@@ -36,6 +36,10 @@ export function getTagsDatas(recipes) {
         });
     });
 
+    tagsDatas.Ingredients.sort();
+    tagsDatas.Appareils.sort();
+    tagsDatas.Ustensiles.sort();
+
     return tagsDatas;
 };
 

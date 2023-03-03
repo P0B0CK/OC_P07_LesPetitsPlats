@@ -70,6 +70,6 @@ export function getFilteredRecipesByTags(tag, recipes){
                 };
     })});
     }
-
+    
     return filteredRecipes;
 }

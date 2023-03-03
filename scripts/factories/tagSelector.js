@@ -51,7 +51,7 @@ export function getSelectorsTags(tabTag) {
             btnSelect.appendChild(listContainer);
             
             // Lorsque le bouton select est actif : 
-            btnSelect.addEventListener('mousedown', (e) => {
+            btnSelect.addEventListener('click', (e) => {
                 btnContent.innerHTML = `<div class="btn-select-search">
                         <input type="text" class='btn-search' placeholder="Recherche un ${tabTag.slice(0, -1).toLowerCase()}"></div>`;
                 btnSelect.classList.add("btn-select-active");
