@@ -4,6 +4,7 @@
  */
 
 import { displayTags, handleRecipes } from "../pages/main.js";
+import { getTagsDatas } from "./datasTags.js";
 
 /**
  * /////////////////////
@@ -12,6 +13,8 @@ import { displayTags, handleRecipes } from "../pages/main.js";
 */
 
 export let selectedTags = [];
+
+// const tagsList = document.querySelector('.list-content');
 
 /**
  * ////////////////////
@@ -64,16 +67,17 @@ export function getSelectorsTags(tabTag) {
                 btnContent.appendChild(btnArrow);
 
                     // Arrête la propagation de l'événement.
-                    const inputSearch = btnContent.querySelector('.btn-search');
+                    // const inputSearch = document.querySelector(`#${tabTag}-select .btn-search`);
+                    const inputSearch = document.querySelector('.btn-search'); // Barre de recherche secondaire (selecteurs)
                     inputSearch.addEventListener('click', (e) => {
                         e.stopPropagation();
                     });
 
-                    // const inputSearch = document.querySelector('input.btn-search'); // Barre de recherche secondaire (selecteurs)
 
-                    inputSearch.addEventListener('keyup', (e) => {
+                    inputSearch.addEventListener('input', (e) => {
                         const searchValue = e.target.value;
-                        console.log(searchValue);
+                        const tagsList = document.querySelector('.list-content');
+                        handleTagSearch(searchValue, tagsList, tabTag);
                     });
             });
 
@@ -95,7 +99,7 @@ export function getSelectorsTags(tabTag) {
  * 
  * @param {name} tabTag 
  * @param {type} typeTag 
- * @returns Element : <li>TAG</li>
+ * @returns HTMLelement : <li>TAG</li>
  */        
 export function getTagList(tabTag, typeTag) {
             
@@ -154,4 +158,44 @@ function removeTagThumb(tagToRemove) {
     
     displayTags();
     handleRecipes();
+}
+
+/**
+ * ACTUALISE la liste des tags selon sélecteur
+ * @param {*} tabTag 
+ * @returns 
+ */
+export function handleTagsNameInCurrentList(tabTag) {
+    const currentList = document.querySelector(`.list-content`);
+    const tagNames = Array.from(currentList.children).map(li => li.textContent.trim());
+    return tagNames;
+};
+
+/**
+ * RECHERCHE les tags correspondant à la saisie
+ * @param {*} tagsList 
+ * @param {*} searchValue 
+ * @returns 
+ */
+function filterTagsByName(tagsList, searchValue) {
+    const filteredTags = tagsList.filter(tag => tag.toLowerCase().includes(searchValue.toLowerCase()));
+    return filteredTags;
+}
+
+/**
+ * RESTITUE les tags recherchés
+ * @param {*} searchValue 
+ * @param {*} tabTag 
+ */
+export function handleTagSearch(searchValue, listIngDOM, listAppDOM, listUstDOM) {
+    if (searchValue.length >= 2) {
+        const tagNames = [
+            ...handleTagsNameInCurrentList(listIngDOM),
+            ...handleTagsNameInCurrentList(listAppDOM),
+            ...handleTagsNameInCurrentList(listUstDOM),
+          ];
+        const filteredTags = filterTagsByName(tagNames, searchValue);
+        console.log(filteredTags);
+        displayTags(filteredTags);
+    }    
 }
