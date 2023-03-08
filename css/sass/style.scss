@@ -102,7 +102,6 @@ input {
     font-weight: 700;
     text-align: center;
     line-height: 21.6px;
-    cursor: pointer;
     &#ing-select{
         background-color: #3282F7;
         border-color: #3282F7;
@@ -124,19 +123,29 @@ input {
     width: 667px;
     justify-content: space-between;
     height: 69px;
+    border-radius: 5px 5px 0 0;
     cursor: pointer;
 }
 
 .btn-content {
-    height: 100%;
     display: flex;
-    flex-flow: row nowrap;
-
+    flex-direction: row nowrap;
     justify-content: space-between;
     align-items: center;
+}   
+    .btn-title {
+        width: 80%;
+        padding-left : 5px;
+    }
+    .btn-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 69px;
+        height: 69px;
 
-    padding: 20px 0 20px 20px;
-}
+        cursor: pointer;
+    }
 
 .btn-search {
     width: 80%;
@@ -242,10 +251,6 @@ li {
 
 .btn-name {
     width: 70%;
-}
-
-.btn-arrow {
-    width: 69px;
 }
 
 .btn-arrowUp {

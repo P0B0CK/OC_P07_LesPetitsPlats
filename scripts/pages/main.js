@@ -1,7 +1,7 @@
 import { datasRecipes } from "../../datas/recipes.js";
 import { recipeCard } from "../factories/recipeCard.js";
 import { getTagsDatas } from "../factories/datasTags.js";
-import { getSelectorsTags, getTagList, selectedTags, tagThumbnail, handleTagsNameInCurrentList, handleTagSearch } from "../factories/tagSelector.js";
+import { getSelectorsTags, getTagList, selectedTags, tagThumbnail } from "../factories/tagSelector.js";
 
 import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searchArray.js";
 
@@ -142,10 +142,13 @@ function handleSelector() {
     for (let i = 0 ; i < btnSelectDOM.length ; i++) {
         if ( i == 0) {
             btnSelectDOM[i].setAttribute('id', 'ing-select');
+            btnSelectDOM[i].setAttribute('data-type', 'ingredients');
         } if ( i == 1) {
             btnSelectDOM[i].setAttribute('id', 'app-select');
+            btnSelectDOM[i].setAttribute('data-type', 'appareils');
         } if ( i == 2) {
             btnSelectDOM[i].setAttribute('id', 'ust-select');
+            btnSelectDOM[i].setAttribute('data-type', 'ustensils');
         }
     };
     
@@ -158,42 +161,19 @@ function handleTaglist() {
     const selectIng = document.querySelector('#ing-select');
     const selectApp = document.querySelector('#app-select');
     const selectUst = document.querySelector('#ust-select');
+
     
     const listIngDOM = selectIng.children[1].children[0];
     const listAppDOM = selectApp.children[1].children[0];
     const listUstDOM = selectUst.children[1].children[0];
     
-    
     listIngDOM.innerHTML = '';
     listAppDOM.innerHTML = '';
     listUstDOM.innerHTML = '';
-    // tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
-    // tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
-    // tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
-
-    // const ingTagNames = handleTagsNameInCurrentList(listIngDOM);
-    // const appTagNames = handleTagsNameInCurrentList(listAppDOM);
-    // const ustTagNames = handleTagsNameInCurrentList(listUstDOM);
-
-    // handleTagSearch(inputSearchTag.value, listIngDOM, listAppDOM, listUstDOM);
-    tagIng.forEach(ing => {
-        listIngDOM.appendChild(new getTagList(ing, 'ingredients'))
-    });
-    tagApp.forEach(app => {
-        listAppDOM.appendChild(new getTagList(app, 'appareils'))
-    });
-    tagUst.forEach(ust => {
-        listUstDOM.appendChild(new getTagList(ust, 'ustensils'))
-    });
-
-    const ingTagNames = handleTagsNameInCurrentList(listIngDOM);
-    const appTagNames = handleTagsNameInCurrentList(listAppDOM);
-    const ustTagNames = handleTagsNameInCurrentList(listUstDOM);
-
-    // Passer tous les arguments requis pour handleTagSearch()
-    handleTagSearch('', listIngDOM, ingTagNames, appTagNames, ustTagNames);
+    tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
+    tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
+    tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
 };
-
 
 function init() {
     orderedRecipes = sortRecipes();
@@ -201,9 +181,7 @@ function init() {
     handleSelector();
     handleTaglist(tagsDatas);
     displayTags(selectedTags);
-    handleTagsNameInCurrentList();
     handleTaglist(tagIng, tagApp, tagUst);
-    handleTagSearch();
 }
 
 init()
