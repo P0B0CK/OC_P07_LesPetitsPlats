@@ -14,6 +14,7 @@ import { getTagsDatas } from "./datasTags.js";
 
 export let selectedTags = [];
 
+const selectorSearch = document.querySelectorAll('.btn-search');
 
 const selectorArrow = document.querySelectorAll('.btn-arrow');
 
@@ -24,7 +25,7 @@ const selectorArrow = document.querySelectorAll('.btn-arrow');
  * ////  EVENTS   ////
  * //////////////////
 */
-console.log(selectorArrow)
+
 /**
  * ////////////////////
  * //// FONCTIONS ////
@@ -38,7 +39,6 @@ console.log(selectorArrow)
  * @returns {HTMLElement} - BTN Selecteur de tag
  */
 export function getSelectorsTags(tabTag, typeTag) {
-    console.log(typeTag)
     // Crée le bouton sélecteur
     const selectorTag = document.createElement('div');
     selectorTag.setAttribute('class', 'btn-select');
@@ -121,32 +121,32 @@ export function getSelectorsTags(tabTag, typeTag) {
                 
                 
                 // inputSearch.addEventListener('input', (e) => {
-                    //     const searchValue = e.target.value;
-                    //     const tagsList = document.querySelector('.list-content');
-                    //     handleTagSearch(searchValue, tagsList, tabTag);
-                    // });
-            
-
-            
+                //         const searchValue = e.target.value;
+                //         const tagsList = document.querySelector('.list-content');
+                //         handleTagSearch(searchValue, tagsList, tabTag);
+                //     });
+                
     return selectorTag; 
 };
 
 // Ferme tous les autres sélecteurs
-function closeOtherSelectors(currentSelector) {
-  const selectors = document.querySelectorAll('.btn-select');
-  selectors.forEach((selector) => {
-    if (selector !== currentSelector && selector.classList.contains('btn-select-active')) {
-      selector.classList.remove('btn-select-active');
-      selector.querySelector('.list-container').classList.add('hide');
-      selector.querySelector('.btn-content').innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
-    //   selector.selectorBtnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
-    
-    //   selectorBtnContent.appendChild(btnArrow);
-    //   isOpen = false;
-      selector.querySelector('.btn-arrow').innerHTML = `<img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">`;
+function closeOtherSelectors(currentSelector, tabTag) {
+    const selectors = document.querySelectorAll('.btn-select');
+    selectors.forEach((selector) => {
+      if (selector !== currentSelector && selector.classList.contains('btn-select-active')) {
+        selector.classList.remove('btn-select-active');
+        selector.querySelector('.list-container').classList.add('hide');
+        selector.querySelector('.btn-content').innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
+        selector.querySelector('.btn-arrow').innerHTML = `<img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">`;
+      }
+    });
+  
+    if (!currentSelector.classList.contains('btn-select-active')) {
+      currentSelector.classList.add('btn-select-active');
+      currentSelector.querySelector('.list-container').classList.remove('hide');
+      currentSelector.querySelector('.btn-arrow').innerHTML = `<img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowDown">`;
     }
-  });
-}
+  }
 
 /**
  * AJOUTE les tags dans la liste
@@ -210,5 +210,5 @@ function removeTagThumb(tagToRemove) {
     selectedTags.splice(index, 1);
     
     displayTags();
-    handleRecipes();
+    handleecipes();
 }
