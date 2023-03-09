@@ -3,7 +3,7 @@
  * @param {object btn tags selectors} tabTag
  */
 
-import { displayTags, handleRecipes } from "../pages/main.js";
+import { displayTags, handleRecipes, handleTagsByTagThumb } from "../pages/main.js";
 import { getTagsDatas } from "./datasTags.js";
 
 /**
@@ -14,6 +14,7 @@ import { getTagsDatas } from "./datasTags.js";
 
 export let selectedTags = [];
 
+const selectors = document.querySelectorAll('.btn-select[data-type]');
 const selectorSearch = document.querySelectorAll('.btn-search');
 
 const selectorArrow = document.querySelectorAll('.btn-arrow');
@@ -127,6 +128,7 @@ export function getSelectorsTags(tabTag, typeTag) {
                 //     });
                 
     return selectorTag; 
+
 };
 
 // Ferme tous les autres sélecteurs
@@ -171,6 +173,7 @@ export function getTagList(tabTag, typeTag) {
 
         displayTags();
         handleRecipes();
+        handleTagsByTagThumb();
     })
     
     return tagElt;
@@ -210,5 +213,25 @@ function removeTagThumb(tagToRemove) {
     selectedTags.splice(index, 1);
     
     displayTags();
-    handleecipes();
+    handleRecipes();
 }
+
+export function tagListDatas() {
+    
+    const tagsDatasInList = { ingredients: [], appliances: [], ustensils: [] };
+  
+    selectors.forEach(selector => {
+      const typeTag = selector.getAttribute('data-type');
+      const tagsList = selector.querySelector('.list-content');
+      const tags = [...tagsList.querySelectorAll('.tag-elt')].map(tag => tag.textContent.trim());
+      
+      tags.forEach(tag => {
+        if (!tagsDatasInList[typeTag].includes(tag)) {
+            tagsDatasInList[typeTag].push(tag);
+        }
+      });
+    });
+    console.log(tagsDatasInList)
+    return tagsDatasInList;
+}
+

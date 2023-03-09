@@ -26,19 +26,14 @@ console.log(inputSearchTag)
 */
 
 let orderedRecipes = []; // Recettes triées
-// let filteredTagsList = []; // Tableau de la liste des tags filtrés grâce à l'input
-
-const ingTagsList = [];
-const appTagsList = [];
-const ustTagsList = [];
 
 let tagsDatas = getTagsDatas(datasRecipes); // Objet contenant les 3 tableaux de tags :: [datasTags]
 
 const tagsDatasKeysName = Object.keys(tagsDatas); // Noms des 3 tableaux
 
-const tagIng = tagsDatas.Ingredients;
-const tagApp = tagsDatas.Appareils;
-const tagUst = tagsDatas.Ustensiles;
+let tagIng = tagsDatas.Ingredients;
+let tagApp = tagsDatas.Appareils;
+let tagUst = tagsDatas.Ustensiles;
 
 /**
  * ////////////////////
@@ -110,7 +105,7 @@ function displayRecipes(recipes) {
 }
 
 /**
- * AFFICHE les tags
+ * AFFICHE les vignettes des tags dans la section
  */
 export function displayTags() {
     tagsSelectedContainer.innerHTML = ''; // Annule les doublons => vide le contenu précédent de l'élément
@@ -127,6 +122,31 @@ export function displayTags() {
             card.classList.add('color-ust');
         }
     });
+}
+
+
+export function handleTagsByTagThumb() {
+    console.log(selectedTags);
+    // SI le tableau des tags sélectionnés n'est pas vide
+    if (selectedTags.length > 0) {
+        // POUR CHAQUE tag sélectionné du tableau
+        selectedTags.forEach(selectedTag => {
+            // SI le type du tag correspond au type de liste
+            if (selectedTag.type === 'ingredients') {
+                tagIng = tagIng.filter(tag => tag !== selectedTag.name); // Filtre le tableau correspondant au type puis supprime le tag en queston de la liste
+            } else if (selectedTag.type === 'appareils') {
+                tagApp = tagApp.filter(tag => tag !== selectedTag.name); // Filtre le tableau correspondant au type puis supprime le tag en queston de la liste
+            } else if (selectedTag.type === 'ustensils') {
+                tagUst = tagUst.filter(tag => tag !== selectedTag.name); // Filtre le tableau correspondant au type puis supprime le tag en queston de la liste
+            }
+          });
+    }
+      
+      // Mise à jour de la liste des tags
+      handleTaglist(tagIng, tagApp, tagUst);
+      console.log(tagIng);
+      console.log(tagApp);
+      console.log(tagUst);
 }
 
 /**
@@ -173,6 +193,7 @@ function handleTaglist() {
     tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
     tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
     tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
+
 };
 
 function init() {
