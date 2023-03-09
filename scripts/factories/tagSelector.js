@@ -214,6 +214,23 @@ function removeTagThumb(tagToRemove) {
     
     displayTags();
     handleRecipes();
+
+//     // Récupérer le tableau de tags correspondant au type du tag supprimé
+//   let tagList;
+//   if (tagToRemove.type === 'ingredients') {
+//     tagList = tagIng;
+//   } else if (tagToRemove.type === 'appareils') {
+//     tagList = tagApp;
+//   } else if (tagToRemove.type === 'ustensils') {
+//     tagList = tagUst;
+//   }
+
+//   // Ajouter le tag supprimé au tableau de tags correspondant
+//   if (!tagList.includes(tagToRemove.name)) {
+//     tagList.push(tagToRemove.name);
+//   }
+
+  handleTaglist();
 }
 
 export function tagListDatas() {

@@ -61,13 +61,7 @@ function sortRecipes() {
     return orderedRecipes;
 };
 
-/**
- * @type {EventListener} keyup
- * @param {input}
- */
-searchBar.addEventListener('keyup', (e) => {
-    handleRecipes();
-});
+
 
 /**
  * 
@@ -75,13 +69,12 @@ searchBar.addEventListener('keyup', (e) => {
  * @param {tag} def
  * 
 */
-export function handleRecipes() {
+export function handleRecipes(recipes) {
     const searchedContent = searchBar.value;
 
     let filteredRecipes = [];
     
-
-    filteredRecipes = getFilteredRecipes(searchedContent, orderedRecipes);
+    filteredRecipes = getFilteredRecipes(searchedContent, recipes);
     
 
     selectedTags.forEach(tag => {
@@ -89,6 +82,7 @@ export function handleRecipes() {
     });
 
     displayRecipes(filteredRecipes);
+    console.log(filteredRecipes)
     
     let tagData = getTagsDatas(filteredRecipes);
     handleTaglist(tagData);
@@ -177,7 +171,7 @@ function handleSelector() {
 /**
  *  GERER & GENERER pour chaque TYPE de selecteur la liste Correspondante ::
 */
-function handleTaglist() {
+function handleTaglist(tagData) {
     const selectIng = document.querySelector('#ing-select');
     const selectApp = document.querySelector('#app-select');
     const selectUst = document.querySelector('#ust-select');
@@ -190,19 +184,27 @@ function handleTaglist() {
     listIngDOM.innerHTML = '';
     listAppDOM.innerHTML = '';
     listUstDOM.innerHTML = '';
-    tagIng.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
-    tagApp.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
-    tagUst.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
+    tagData.Ingredients.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
+    tagData.Appareils.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
+    tagData.Ustensiles.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
 
 };
 
 function init() {
     orderedRecipes = sortRecipes();
-    displayRecipes(orderedRecipes);
+    // displayRecipes(orderedRecipes);
     handleSelector();
-    handleTaglist(tagsDatas);
-    displayTags(selectedTags);
-    handleTaglist(tagIng, tagApp, tagUst);
+    handleRecipes(orderedRecipes);
+    // handleTaglist(tagsDatas);
+    // displayTags(selectedTags);
+    // handleTaglist(tagIng, tagApp, tagUst);
+    /**
+ * @type {EventListener} keyup
+ * @param {input}
+ */
+searchBar.addEventListener('keyup', (e) => {
+    handleRecipes(orderedRecipes);
+});
 }
 
 init()
