@@ -28,7 +28,6 @@ console.log(inputSearchTag)
 let orderedRecipes = []; // Recettes triées
 
 let tagsDatas = getTagsDatas(datasRecipes); // Objet contenant les 3 tableaux de tags :: [datasTags]
-
 const tagsDatasKeysName = Object.keys(tagsDatas); // Noms des 3 tableaux
 
 let tagIng = tagsDatas.Ingredients;
@@ -43,8 +42,8 @@ let tagUst = tagsDatas.Ustensiles;
 
 /**
  * 
- * @returns orderedRecipes
  * RECETTES triées alphabétiquement
+ * @returns orderedRecipes
  */
 function sortRecipes() {
     orderedRecipes = datasRecipes.sort((a, b) => {
@@ -64,8 +63,9 @@ function sortRecipes() {
 
 
 /**
- * 
- * @param {input} value
+ * GERER l'affichage des recettes
+ * @param {datas} orderedRecipes
+ * @param {input} value 
  * @param {tag} def
  * 
 */
@@ -74,18 +74,18 @@ export function handleRecipes(recipes) {
 
     let filteredRecipes = [];
     
-    filteredRecipes = getFilteredRecipes(searchedContent, recipes);
+    filteredRecipes = getFilteredRecipes(searchedContent, recipes); // appel la fn de tri lors de la recherche principale
+    console.log(filteredRecipes)
     
 
     selectedTags.forEach(tag => {
-        filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
+        filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes); // POUR CHAQUE tag sélectonné appel la fonction de tri par tag
     });
 
     displayRecipes(filteredRecipes);
-    console.log(filteredRecipes)
     
     let tagData = getTagsDatas(filteredRecipes);
-    handleTaglist(tagData);
+    handleTaglist(tagData); // mettre à jour les listes de tags dans les sélecteurs
 };
 
 /**
@@ -134,6 +134,8 @@ export function handleTagsByTagThumb() {
                 tagUst = tagUst.filter(tag => tag !== selectedTag.name); // Filtre le tableau correspondant au type puis supprime le tag en queston de la liste
             }
           });
+    } else {
+        handleRecipes();
     }
       
       // Mise à jour de la liste des tags
@@ -198,7 +200,9 @@ function init() {
     // handleTaglist(tagsDatas);
     // displayTags(selectedTags);
     // handleTaglist(tagIng, tagApp, tagUst);
-    /**
+
+
+/**
  * @type {EventListener} keyup
  * @param {input}
  */

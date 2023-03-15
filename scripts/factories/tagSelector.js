@@ -39,7 +39,7 @@ const selectorArrow = document.querySelectorAll('.btn-arrow');
  * @param {string} typeTag - "ingredients", "appareils" , "ustensiles"
  * @returns {HTMLElement} - BTN Selecteur de tag
  */
-export function getSelectorsTags(tabTag, typeTag) {
+export function getSelectorsTags(tabTag) {
     // Crée le bouton sélecteur
     const selectorTag = document.createElement('div');
     selectorTag.setAttribute('class', 'btn-select');
