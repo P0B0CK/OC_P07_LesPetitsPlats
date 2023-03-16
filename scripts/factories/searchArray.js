@@ -1,15 +1,17 @@
+
 /**
  * SEARCH FILTRED BY ARRAYS METHODS
- * @param {*} value input search bar
- * @param {*} recipes 
+ * @param {input} value - valeur de la barre de recherche principale
+ * @param {datas} recipes - orderedRecipes
  * @returns [filteredRecipes]
  */
 
 export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];
-
+    // console.log('Recettes : ', recipes);
     if ( value.length > 2 ) {
         recipes.forEach( recipe => {
+            
             if (recipe.name.toLowerCase().includes(value.toString().toLowerCase())) {
                 filteredRecipes.push(recipe);
             } else if (recipe.description.toLowerCase().includes(value.toString().toLowerCase())) {
@@ -35,16 +37,16 @@ export function getFilteredRecipes(value, recipes){
 
 /**
  * SEARCH FILTRED BY TAG WITH ARRAYS METHODS
- * @param {*} tag 
+ * @param {html} Tag - Vignette des tags sélectionnées
  * @param {*} recipes 
  * @returns [filteredRecipes]
  */
 
 export function getFilteredRecipesByTags(tag, recipes){
+    console.log(recipes)
     let filteredRecipes = [];
 
     if (tag.type === 'ingredients') {
-
         recipes.forEach( recipe => {
             recipe.ingredients.forEach( ingredient => {
                 if (ingredient.ingredient.toLowerCase().includes(tag.name.toString().toLowerCase())) {
@@ -70,6 +72,6 @@ export function getFilteredRecipesByTags(tag, recipes){
                 };
     })});
     }
-    
+
     return filteredRecipes;
 }

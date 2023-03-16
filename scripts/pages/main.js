@@ -25,7 +25,7 @@ console.log(inputSearchTag)
  * ///////////////////
 */
 
-let orderedRecipes = []; // Recettes triées
+let orderedRecipes = []; // Stocke les datasRecipes ordonnées
 
 let tagsDatas = getTagsDatas(datasRecipes); // Objet contenant les 3 tableaux de tags :: [datasTags]
 const tagsDatasKeysName = Object.keys(tagsDatas); // Noms des 3 tableaux
@@ -41,11 +41,12 @@ let tagUst = tagsDatas.Ustensiles;
 */
 
 /**
+ *  
+ * TRIER les datasRecipes[] par ordre alphabétique
  * 
- * RECETTES triées alphabétiquement
  * @returns orderedRecipes
- */
-function sortRecipes() {
+*/
+function sortRecipes(){
     orderedRecipes = datasRecipes.sort((a, b) => {
         if  ( a.name < b.name ) {
             return -1;
@@ -60,33 +61,42 @@ function sortRecipes() {
     return orderedRecipes;
 };
 
-
-
 /**
- * GERER l'affichage des recettes
- * @param {datas} orderedRecipes
- * @param {input} value 
+ * 
+ * MANIPULE l'affichage des recettes
+ * 
+ * @param {datas} orderedRecipes - tableau des recettes triées
+ * @param {input} value - valeur de la barre de recherche principale
  * @param {tag} def
  * 
 */
 export function handleRecipes(recipes) {
-    const searchedContent = searchBar.value;
-
     let filteredRecipes = [];
-    
-    filteredRecipes = getFilteredRecipes(searchedContent, recipes); // appel la fn de tri lors de la recherche principale
+      
+    const searchedContent = searchBar.value;
+  
+    filteredRecipes = getFilteredRecipes(searchedContent, recipes); // filtrer les recettes en fonction du contenu recherché
     console.log(filteredRecipes)
-    
+    console.log('tag sélectioné : ', selectedTags);
+      
+    if (selectedTags.length > 0) {
+      selectedTags.forEach(tag => {
+        filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
+        console.log('tag sélectionné : ', tag.type);
+        console.log(filteredRecipes);
 
-    selectedTags.forEach(tag => {
-        filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes); // POUR CHAQUE tag sélectonné appel la fonction de tri par tag
-    });
-
+      });
+      displayRecipes(filteredRecipes);
+    } else {
+      displayRecipes(orderedRecipes);
+    }
+    console.log(filteredRecipes)
     displayRecipes(filteredRecipes);
     
     let tagData = getTagsDatas(filteredRecipes);
     handleTaglist(tagData); // mettre à jour les listes de tags dans les sélecteurs
-};
+  }
+
 
 /**
  * AFFICHER les cartes recettes ::
@@ -194,13 +204,19 @@ function handleTaglist(tagData) {
 
 function init() {
     orderedRecipes = sortRecipes();
-    // displayRecipes(orderedRecipes);
     handleSelector();
     handleRecipes(orderedRecipes);
+    // displayRecipes(orderedRecipes);
     // handleTaglist(tagsDatas);
     // displayTags(selectedTags);
     // handleTaglist(tagIng, tagApp, tagUst);
+};
 
+/**
+ * /////////////////////
+ * /////  EVENTS  /////
+ * ///////////////////
+*/
 
 /**
  * @type {EventListener} keyup
@@ -209,6 +225,5 @@ function init() {
 searchBar.addEventListener('keyup', (e) => {
     handleRecipes(orderedRecipes);
 });
-}
 
 init()

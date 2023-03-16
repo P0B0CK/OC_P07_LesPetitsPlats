@@ -156,7 +156,7 @@ function closeOtherSelectors(currentSelector, tabTag) {
  * @param {String} typeTag 
  * @returns 
  */
-export function getTagList(tabTag, typeTag) {
+export function getTagList(tabTag, typeTag, recipes) {
             
     const tagElt = document.createElement('li');
     tagElt.setAttribute('class', 'tag-elt');
@@ -172,7 +172,7 @@ export function getTagList(tabTag, typeTag) {
         }
 
         displayTags();
-        handleRecipes();
+        handleRecipes(recipes);
         handleTagsByTagThumb();
     })
     
