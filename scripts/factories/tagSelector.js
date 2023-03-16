@@ -172,6 +172,7 @@ export function getTagList(tabTag, typeTag, recipes) {
         }
 
         displayTags();
+        console.log('recipes undefined ?', recipes);
         handleRecipes(recipes);
         handleTagsByTagThumb();
     })
@@ -184,7 +185,7 @@ export function getTagList(tabTag, typeTag, recipes) {
  * @param {elt} tabTag 
  * @returns Element : vignette du Tag
  */
-export function tagThumbnail(tabTag) {
+export function tagThumbnail(tabTag, recipes) {
     const tagCard = document.createElement('div');
     tagCard.classList.add('tag-card');
     
@@ -198,7 +199,7 @@ export function tagThumbnail(tabTag) {
     
     const closeCross = tagCard.querySelector('.thumb-cross');
     
-    closeCross.addEventListener('click', (tagToRemove) => removeTagThumb(tagToRemove));
+    closeCross.addEventListener('click', (tagToRemove) => removeTagThumb(tagToRemove, recipes));
     
     return tagCard;
 };
@@ -207,30 +208,14 @@ export function tagThumbnail(tabTag) {
  * SUPPRMER LA VIGNETTE TAG
  * @param {objet} tagToRemove 
  */
-function removeTagThumb(tagToRemove) {
+function removeTagThumb(tagToRemove, recipes) {
     let index = selectedTags.findIndex(tag => tag.type === tagToRemove.type && tag.name === tagToRemove.name);
     
     selectedTags.splice(index, 1);
     
-    displayTags();
-    handleRecipes();
-
-//     // Récupérer le tableau de tags correspondant au type du tag supprimé
-//   let tagList;
-//   if (tagToRemove.type === 'ingredients') {
-//     tagList = tagIng;
-//   } else if (tagToRemove.type === 'appareils') {
-//     tagList = tagApp;
-//   } else if (tagToRemove.type === 'ustensils') {
-//     tagList = tagUst;
-//   }
-
-//   // Ajouter le tag supprimé au tableau de tags correspondant
-//   if (!tagList.includes(tagToRemove.name)) {
-//     tagList.push(tagToRemove.name);
-//   }
-
-  handleTaglist();
+    displayTags(); // actualise la liste des tags affichés
+    
+    handleRecipes(recipes);
 }
 
 export function tagListDatas() {

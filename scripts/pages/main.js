@@ -76,21 +76,21 @@ export function handleRecipes(recipes) {
     const searchedContent = searchBar.value;
   
     filteredRecipes = getFilteredRecipes(searchedContent, recipes); // filtrer les recettes en fonction du contenu recherché
-    console.log(filteredRecipes)
-    console.log('tag sélectioné : ', selectedTags);
+    console.log('restitution', filteredRecipes)
+    // console.log('tag sélectioné : ', selectedTags);
       
     if (selectedTags.length > 0) {
       selectedTags.forEach(tag => {
         filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
-        console.log('tag sélectionné : ', tag.type);
-        console.log(filteredRecipes);
+        // console.log('tag sélectionné : ', tag.type);
+        // console.log(filteredRecipes);
 
       });
       displayRecipes(filteredRecipes);
     } else {
       displayRecipes(orderedRecipes);
     }
-    console.log(filteredRecipes)
+    // console.log(filteredRecipes)
     displayRecipes(filteredRecipes);
     
     let tagData = getTagsDatas(filteredRecipes);
@@ -115,7 +115,7 @@ export function displayTags() {
     tagsSelectedContainer.innerHTML = ''; // Annule les doublons => vide le contenu précédent de l'élément
     
     selectedTags.forEach(tag => {
-      const card = tagThumbnail(tag.name); // crée une carte pour le tag donné
+      const card = tagThumbnail(tag.name, orderedRecipes); // crée une carte pour le tag donné
       tagsSelectedContainer.appendChild(card); // ajoute la carte à l'élément cible
 
       if (tag.type === 'ingredients') {
@@ -148,11 +148,11 @@ export function handleTagsByTagThumb() {
         handleRecipes();
     }
       
-      // Mise à jour de la liste des tags
-      handleTaglist(tagIng, tagApp, tagUst);
-      console.log(tagIng);
-      console.log(tagApp);
-      console.log(tagUst);
+    //   // Mise à jour de la liste des tags
+    //   handleTaglist(tagIng, tagApp, tagUst);
+    //   console.log(tagIng);
+    //   console.log(tagApp);
+    //   console.log(tagUst);
 }
 
 /**
@@ -196,10 +196,30 @@ function handleTaglist(tagData) {
     listIngDOM.innerHTML = '';
     listAppDOM.innerHTML = '';
     listUstDOM.innerHTML = '';
-    tagData.Ingredients.forEach( ing => {listIngDOM.appendChild(new getTagList(ing, 'ingredients'))});
-    tagData.Appareils.forEach( app => {listAppDOM.appendChild(new getTagList(app, 'appareils'))});
-    tagData.Ustensiles.forEach( ust => {listUstDOM.appendChild(new getTagList(ust, 'ustensils'))});
+    tagData.Ingredients.forEach( ing => {
+        if (!selectedTags.some(function (tag) {
+            return ing === tag.name && 'ingredients' === tag.type;
+        })) {
 
+            listIngDOM.appendChild(new getTagList(ing, 'ingredients', orderedRecipes))
+        }
+    });
+    tagData.Appareils.forEach( app => {
+        if (!selectedTags.some(function (tag) {
+            return app === tag.name && 'appareils' === tag.type;
+        })) {
+            listAppDOM.appendChild(new getTagList(app, 'appareils', orderedRecipes ))
+        }
+    });
+    tagData.Ustensiles.forEach( ust => {
+        if (!selectedTags.some(function (tag) {
+            return ust === tag.name && 'ustensils' === tag.type;
+        })) {
+            listUstDOM.appendChild(new getTagList(ust, 'ustensils', orderedRecipes))
+        }
+    });
+
+    console.log('tableau des tags selectioné', selectedTags);
 };
 
 function init() {
