@@ -76,7 +76,7 @@ export function getSelectorsTags(tabTag) {
             // Ouvre le selecteur est le referme SI est déjà ouvert :
             btnArrow.addEventListener('click', (e) => {
                 if (!isOpen) {
-                    closeOtherSelectors(selectorTag); // Ferme tous les autres sélecteurs
+                    closeOtherSelectors(selectorTag, tabTag); // Ferme tous les autres sélecteurs
                     selectorBtnContent.innerHTML = `<div class="btn-select-search">
                         <input type="text" class='btn-search' placeholder="Recherche un ${tabTag.slice(0, -1).toLowerCase()}"></div>`;
                     selectorTag.classList.add("btn-select-active");
@@ -138,8 +138,11 @@ function closeOtherSelectors(currentSelector, tabTag) {
       if (selector !== currentSelector && selector.classList.contains('btn-select-active')) {
         selector.classList.remove('btn-select-active');
         selector.querySelector('.list-container').classList.add('hide');
-        selector.querySelector('.btn-content').innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
-        selector.querySelector('.btn-arrow').innerHTML = `<img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">`;
+        selector.querySelector('.btn-content').innerHTML = `
+            <div class="btn-title"><p>${tabTag}</p></div>
+            <div class="btn-arrow">
+                <img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">
+            </div>`;
       }
     });
   
