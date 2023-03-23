@@ -34,6 +34,10 @@ let tagIng = tagsDatas.Ingredients;
 let tagApp = tagsDatas.Appareils;
 let tagUst = tagsDatas.Ustensiles;
 
+export let tagDataFiltered = null;
+
+// let currentTag = getFilteredTags(filteredTags);
+
 /**
  * ////////////////////
  * //// FONCTIONS ////
@@ -89,6 +93,7 @@ export function handleRecipes(recipes) {
     
     let tagData = getTagsDatas(filteredRecipes);
     handleTaglist(tagData); // mettre à jour les listes de tags dans les sélecteurs
+    tagDataFiltered = tagData;
   }
 
 
@@ -172,28 +177,23 @@ function handleSelector() {
 */
 
 export function handleTaglist(tagData) {
-    const selectIng = document.querySelector('#ing-select');
+    console.log(tagData)
     const selectApp = document.querySelector('#app-select');
     const selectUst = document.querySelector('#ust-select');
 
     
-    const listIngDOM = selectIng.children[1].children[0];
     const listAppDOM = selectApp.children[1].children[0];
     const listUstDOM = selectUst.children[1].children[0];
     
-    listIngDOM.innerHTML = '';
+    
     listAppDOM.innerHTML = '';
     listUstDOM.innerHTML = '';
+
+    displayTagsIngredients(tagData.Ingredients);
     
     // POUR CHAQUE tableaux de données
         // VERRIFIE SI le tag est déjà présent dans la liste
-    tagData.Ingredients.forEach( ing => {
-        if (!selectedTags.some(function (tag) {
-            return ing === tag.name && 'ingredients' === tag.type;
-        })) {
-            listIngDOM.appendChild(new getTagList(ing, 'ingredients', orderedRecipes))
-        }
-    });
+
     tagData.Appareils.forEach( app => {
         if (!selectedTags.some(function (tag) {
             return app === tag.name && 'appareils' === tag.type;
@@ -209,6 +209,21 @@ export function handleTaglist(tagData) {
         }
     });
 };
+
+export function displayTagsIngredients(tagDataIng) {
+    const selectIng = document.querySelector('#ing-select');
+    const listIngDOM = selectIng.children[1].children[0];
+
+    listIngDOM.innerHTML = '';
+
+    tagDataIng.forEach( ing => {
+        if (!selectedTags.some(function (tag) {
+            return ing === tag.name && 'ingredients' === tag.type;
+        })) {
+            listIngDOM.appendChild(new getTagList(ing, 'ingredients', orderedRecipes))
+        }
+    });
+}
 
 function init() {
     orderedRecipes = sortRecipes();

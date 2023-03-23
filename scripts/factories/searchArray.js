@@ -5,7 +5,7 @@
  * @returns [filteredRecipes]
  */
 
-import { handleTaglist, tagsDatas } from "../pages/main.js";
+import { handleTaglist, tagDataFiltered, tagsDatas } from "../pages/main.js";
 
 export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];
@@ -81,10 +81,11 @@ export function getFilteredTags(searchText, tabKey) {
     // console.log(searchText); // saisie en recherche
     // console.log(tabKey); // nom du sélecteur
     // console.log(tagsDatas); // tableau d'objets contenant d'autre objets
-
-    const filteredTags = tagsDatas[tabKey].filter(tagInTab => tagInTab.toLowerCase().includes(searchText.toLowerCase()));
-    // console.log(tagsDatas.Appareils[0]);
-
-    console.log(filteredTags);
-    return filteredTags;
-}
+    if (searchText == undefined) {
+        return tagDataFiltered[tabKey]
+    } else {
+        const filteredTags = tagDataFiltered[tabKey].filter(tagInTab => tagInTab.toLowerCase().includes(searchText.toLowerCase()));
+        console.log(filteredTags);
+        return filteredTags;
+    }
+    };

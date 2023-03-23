@@ -3,7 +3,7 @@
  * @param {object btn tags selectors} tabTag
  */
 
-import { displayTags, handleRecipes, handleTagsByTagThumb, handleTaglist } from "../pages/main.js";
+import { displayTags, handleRecipes, handleTagsByTagThumb, handleTaglist, displayTagsIngredients } from "../pages/main.js";
 import { getFilteredTags } from "./searchArray.js";
 
 /**
@@ -94,9 +94,8 @@ export function getSelectorsTags(tabKey) {
                     input.addEventListener('keyup', () => {
                         let valueOfInputSearchTag = input.value;
                         // console.log('saisie ' , valueOfInputSearchTag );
-                        if (valueOfInputSearchTag.length >= 2) {
-                            getFilteredTags(valueOfInputSearchTag, tabKey); // envoie la valeur recherchée dans la fonction de filtre
-                        }
+                            let tagListFilteredIng = getFilteredTags(valueOfInputSearchTag, tabKey); // envoie la valeur recherchée dans la fonction de filtre
+                            displayTagsIngredients(tagListFilteredIng);
                     });
                 });
             });
