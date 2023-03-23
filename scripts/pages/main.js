@@ -3,7 +3,7 @@ import { recipeCard } from "../factories/recipeCard.js";
 import { getTagsDatas } from "../factories/datasTags.js";
 import { getSelectorsTags, getTagList, selectedTags, tagThumbnail } from "../factories/tagSelector.js";
 
-import { getFilteredRecipes, getFilteredRecipesByTags } from "../factories/searchArray.js";
+import { getFilteredRecipes, getFilteredRecipesByTags, getFilteredTags } from "../factories/searchArray.js";
 
 
 /**
@@ -17,7 +17,7 @@ const tagsSelectedContainer = document.querySelector('.tags-selected-container')
 
 const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
 const inputSearchTag = document.querySelectorAll('.btn-search'); // Barre de recherche secondaire prévue dans les sélecteurs
-console.log(inputSearchTag)
+
 
 /**
  * /////////////////////
@@ -27,7 +27,7 @@ console.log(inputSearchTag)
 
 let orderedRecipes = []; // Stocke les datasRecipes ordonnées
 
-let tagsDatas = getTagsDatas(datasRecipes); // Objet contenant les 3 tableaux de tags :: [datasTags]
+export let tagsDatas = getTagsDatas(datasRecipes); // Objet contenant les 3 tableaux de tags :: [datasTags]
 const tagsDatasKeysName = Object.keys(tagsDatas); // Noms des 3 tableaux
 
 let tagIng = tagsDatas.Ingredients;
@@ -76,21 +76,15 @@ export function handleRecipes(recipes) {
     const searchedContent = searchBar.value;
   
     filteredRecipes = getFilteredRecipes(searchedContent, recipes); // filtrer les recettes en fonction du contenu recherché
-    console.log('restitution', filteredRecipes)
-    // console.log('tag sélectioné : ', selectedTags);
       
     if (selectedTags.length > 0) {
-      selectedTags.forEach(tag => {
-        filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes);
-        // console.log('tag sélectionné : ', tag.type);
-        // console.log(filteredRecipes);
-
-      });
+      selectedTags.forEach(tag => { 
+        filteredRecipes = getFilteredRecipesByTags(tag, filteredRecipes); 
+        });
       displayRecipes(filteredRecipes);
     } else {
       displayRecipes(orderedRecipes);
     }
-    // console.log(filteredRecipes)
     displayRecipes(filteredRecipes);
     
     let tagData = getTagsDatas(filteredRecipes);
@@ -130,7 +124,6 @@ export function displayTags() {
 
 
 export function handleTagsByTagThumb() {
-    console.log(selectedTags);
     // SI le tableau des tags sélectionnés n'est pas vide
     if (selectedTags.length > 0) {
         // POUR CHAQUE tag sélectionné du tableau
@@ -147,12 +140,6 @@ export function handleTagsByTagThumb() {
     } else {
         handleRecipes();
     }
-      
-    //   // Mise à jour de la liste des tags
-    //   handleTaglist(tagIng, tagApp, tagUst);
-    //   console.log(tagIng);
-    //   console.log(tagApp);
-    //   console.log(tagUst);
 }
 
 /**
@@ -183,7 +170,8 @@ function handleSelector() {
 /**
  *  GERER & GENERER pour chaque TYPE de selecteur la liste Correspondante ::
 */
-function handleTaglist(tagData) {
+
+export function handleTaglist(tagData) {
     const selectIng = document.querySelector('#ing-select');
     const selectApp = document.querySelector('#app-select');
     const selectUst = document.querySelector('#ust-select');
@@ -196,11 +184,13 @@ function handleTaglist(tagData) {
     listIngDOM.innerHTML = '';
     listAppDOM.innerHTML = '';
     listUstDOM.innerHTML = '';
+    
+    // POUR CHAQUE tableaux de données
+        // VERRIFIE SI le tag est déjà présent dans la liste
     tagData.Ingredients.forEach( ing => {
         if (!selectedTags.some(function (tag) {
             return ing === tag.name && 'ingredients' === tag.type;
         })) {
-
             listIngDOM.appendChild(new getTagList(ing, 'ingredients', orderedRecipes))
         }
     });
@@ -218,18 +208,12 @@ function handleTaglist(tagData) {
             listUstDOM.appendChild(new getTagList(ust, 'ustensils', orderedRecipes))
         }
     });
-
-    console.log('tableau des tags selectioné', selectedTags);
 };
 
 function init() {
     orderedRecipes = sortRecipes();
     handleSelector();
     handleRecipes(orderedRecipes);
-    // displayRecipes(orderedRecipes);
-    // handleTaglist(tagsDatas);
-    // displayTags(selectedTags);
-    // handleTaglist(tagIng, tagApp, tagUst);
 };
 
 /**

@@ -3,8 +3,8 @@
  * @param {object btn tags selectors} tabTag
  */
 
-import { displayTags, handleRecipes, handleTagsByTagThumb } from "../pages/main.js";
-import { getTagsDatas } from "./datasTags.js";
+import { displayTags, handleRecipes, handleTagsByTagThumb, handleTaglist } from "../pages/main.js";
+import { getFilteredTags } from "./searchArray.js";
 
 /**
  * /////////////////////
@@ -14,18 +14,6 @@ import { getTagsDatas } from "./datasTags.js";
 
 export let selectedTags = [];
 
-const selectors = document.querySelectorAll('.btn-select[data-type]');
-const selectorSearch = document.querySelectorAll('.btn-search');
-
-const selectorArrow = document.querySelectorAll('.btn-arrow');
-
-// const tagsList = document.querySelector('.list-content');
-
-/**
- * ////////////////////
- * ////  EVENTS   ////
- * //////////////////
-*/
 
 /**
  * ////////////////////
@@ -35,11 +23,11 @@ const selectorArrow = document.querySelectorAll('.btn-arrow');
 
 /**
  * GENERER LES SELECTEURS SELON LEUR TYPE
- * @param {string} tabTag - Le nom du type de tag (ex: "Ingrédients")
+ * @param {string} tabKey - Le nom du type de tag (ex: "Ingrédients")
  * @param {string} typeTag - "ingredients", "appareils" , "ustensiles"
  * @returns {HTMLElement} - BTN Selecteur de tag
  */
-export function getSelectorsTags(tabTag) {
+export function getSelectorsTags(tabKey) {
     // Crée le bouton sélecteur
     const selectorTag = document.createElement('div');
     selectorTag.setAttribute('class', 'btn-select');
@@ -47,7 +35,7 @@ export function getSelectorsTags(tabTag) {
         // Crée le contenu du BTN
         const selectorBtnContent = document.createElement('div');
         selectorBtnContent.setAttribute('class', 'btn-content');
-        selectorBtnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
+        selectorBtnContent.innerHTML = `<div class="btn-title"><p>${tabKey}</p></div>`;
 
         // Crée la flèche du BTN
         const btnArrow = document.createElement('div');
@@ -76,9 +64,9 @@ export function getSelectorsTags(tabTag) {
             // Ouvre le selecteur est le referme SI est déjà ouvert :
             btnArrow.addEventListener('click', (e) => {
                 if (!isOpen) {
-                    closeOtherSelectors(selectorTag, tabTag); // Ferme tous les autres sélecteurs
+                    closeOtherSelectors(selectorTag, tabKey); // Ferme tous les autres sélecteurs
                     selectorBtnContent.innerHTML = `<div class="btn-select-search">
-                        <input type="text" class='btn-search' placeholder="Recherche un ${tabTag.slice(0, -1).toLowerCase()}"></div>`;
+                        <input type="text" class='btn-search' placeholder="Recherche un ${tabKey.slice(0, -1).toLowerCase()}"></div>`;
                     selectorTag.classList.add("btn-select-active");
                     listContainer.classList.remove('hide');
                     btnArrow.innerHTML = `<img 
@@ -92,12 +80,25 @@ export function getSelectorsTags(tabTag) {
                 else {
                     selectorTag.classList.remove("btn-select-active");
                     listContainer.classList.add('hide');
-                    selectorBtnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
+                    selectorBtnContent.innerHTML = `<div class="btn-title"><p>${tabKey}</p></div>`;
                     btnArrow.innerHTML = `<img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">`;
                     selectorBtnContent.appendChild(btnArrow);
                     isOpen = false;
                 }
                 e.stopPropagation();
+
+                // Lorsque l'utilisateur recherche un tag exécute la recherche par tag : 
+                const inputSearchTags = document.querySelectorAll('input.btn-search');
+                
+                inputSearchTags.forEach(input => {
+                    input.addEventListener('keyup', () => {
+                        let valueOfInputSearchTag = input.value;
+                        // console.log('saisie ' , valueOfInputSearchTag );
+                        if (valueOfInputSearchTag.length >= 2) {
+                            getFilteredTags(valueOfInputSearchTag, tabKey); // envoie la valeur recherchée dans la fonction de filtre
+                        }
+                    });
+                });
             });
                 
             // lorsque l'utilisateur clic en dehors du sélecteur :
@@ -105,41 +106,26 @@ export function getSelectorsTags(tabTag) {
             if (!selectorTag.contains(e.target)) {
                 selectorTag.classList.remove("btn-select-active");
                 listContainer.classList.add('hide');
-                selectorBtnContent.innerHTML = `<div class="btn-title"><p>${tabTag}</p></div>`;
+                selectorBtnContent.innerHTML = `<div class="btn-title"><p>${tabKey}</p></div>`;
                 btnArrow.innerHTML = `<img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">`;
                 selectorBtnContent.appendChild(btnArrow);
                 isOpen = false;
             }
             });
-            
-            // // Arrête la propagation de l'événement.
-            // // const inputSearch = document.querySelector(`#${tabTag}-select .btn-search`);
-            // const inputSearch = document.querySelector('.btn-search'); // Barre de recherche secondaire (selecteurs)
-            // inputSearch.addEventListener('click', (e) => {
-                //     e.stopPropagation();
-                
-                // });
-                
-                
-                // inputSearch.addEventListener('input', (e) => {
-                //         const searchValue = e.target.value;
-                //         const tagsList = document.querySelector('.list-content');
-                //         handleTagSearch(searchValue, tagsList, tabTag);
-                //     });
                 
     return selectorTag; 
 
 };
 
 // Ferme tous les autres sélecteurs
-function closeOtherSelectors(currentSelector, tabTag) {
+function closeOtherSelectors(currentSelector, tabKey) {
     const selectors = document.querySelectorAll('.btn-select');
     selectors.forEach((selector) => {
       if (selector !== currentSelector && selector.classList.contains('btn-select-active')) {
         selector.classList.remove('btn-select-active');
         selector.querySelector('.list-container').classList.add('hide');
         selector.querySelector('.btn-content').innerHTML = `
-            <div class="btn-title"><p>${tabTag}</p></div>
+            <div class="btn-title"><p>${tabKey}</p></div>
             <div class="btn-arrow">
                 <img src="../assets/img/btn-arrow.svg" alt="flèche" class="btn-arrowUp">
             </div>`;
@@ -157,7 +143,7 @@ function closeOtherSelectors(currentSelector, tabTag) {
  * AJOUTE les tags dans la liste
  * @param {String} tabTag 
  * @param {String} typeTag 
- * @returns 
+ * @returns html object <li>
  */
 export function getTagList(tabTag, typeTag, recipes) {
             
@@ -175,7 +161,6 @@ export function getTagList(tabTag, typeTag, recipes) {
         }
 
         displayTags();
-        console.log('recipes undefined ?', recipes);
         handleRecipes(recipes);
         handleTagsByTagThumb();
     })
@@ -220,23 +205,3 @@ function removeTagThumb(tagToRemove, recipes) {
     
     handleRecipes(recipes);
 }
-
-export function tagListDatas() {
-    
-    const tagsDatasInList = { ingredients: [], appliances: [], ustensils: [] };
-  
-    selectors.forEach(selector => {
-      const typeTag = selector.getAttribute('data-type');
-      const tagsList = selector.querySelector('.list-content');
-      const tags = [...tagsList.querySelectorAll('.tag-elt')].map(tag => tag.textContent.trim());
-      
-      tags.forEach(tag => {
-        if (!tagsDatasInList[typeTag].includes(tag)) {
-            tagsDatasInList[typeTag].push(tag);
-        }
-      });
-    });
-    console.log(tagsDatasInList)
-    return tagsDatasInList;
-}
-

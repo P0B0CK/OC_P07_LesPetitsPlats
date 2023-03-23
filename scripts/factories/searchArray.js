@@ -1,10 +1,11 @@
-
 /**
  * SEARCH FILTRED BY ARRAYS METHODS
  * @param {input} value - valeur de la barre de recherche principale
  * @param {datas} recipes - orderedRecipes
  * @returns [filteredRecipes]
  */
+
+import { handleTaglist, tagsDatas } from "../pages/main.js";
 
 export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];
@@ -43,7 +44,6 @@ export function getFilteredRecipes(value, recipes){
  */
 
 export function getFilteredRecipesByTags(tag, recipes){
-    console.log(recipes)
     let filteredRecipes = [];
 
     if (tag.type === 'ingredients') {
@@ -74,4 +74,17 @@ export function getFilteredRecipesByTags(tag, recipes){
     }
 
     return filteredRecipes;
+}
+
+export function getFilteredTags(searchText, tabKey) {
+
+    // console.log(searchText); // saisie en recherche
+    // console.log(tabKey); // nom du sélecteur
+    // console.log(tagsDatas); // tableau d'objets contenant d'autre objets
+
+    const filteredTags = tagsDatas[tabKey].filter(tagInTab => tagInTab.toLowerCase().includes(searchText.toLowerCase()));
+    // console.log(tagsDatas.Appareils[0]);
+
+    console.log(filteredTags);
+    return filteredTags;
 }
