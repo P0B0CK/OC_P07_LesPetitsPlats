@@ -3,7 +3,7 @@
  * @param {object btn tags selectors} tabTag
  */
 
-import { displayTags, handleRecipes, handleTagsByTagThumb, handleTaglist, displayTagsIngredients } from "../pages/main.js";
+import { displayTags, handleRecipes, handleTagsByTagThumb, handleTaglist, displayTagsIngredients, displayTagsAppareils, displayTagsUstensiles } from "../pages/main.js";
 import { getFilteredTags } from "./searchArray.js";
 
 /**
@@ -94,8 +94,26 @@ export function getSelectorsTags(tabKey) {
                     input.addEventListener('keyup', () => {
                         let valueOfInputSearchTag = input.value;
                         // console.log('saisie ' , valueOfInputSearchTag );
-                            let tagListFilteredIng = getFilteredTags(valueOfInputSearchTag, tabKey); // envoie la valeur recherchée dans la fonction de filtre
-                            displayTagsIngredients(tagListFilteredIng);
+
+                        // let tagListFilteredIng = getFilteredTags(valueOfInputSearchTag, tabKey);
+                        // displayTagsUstensiles(tagListFilteredUst);
+
+                            let tagListFiltered = getFilteredTags(valueOfInputSearchTag, tabKey); // envoie la valeur recherchée dans la fonction de filtre
+                            // let tagListFilteredIng = getFilteredTags(valueOfInputSearchTag, tabKey);
+                            // let tagListFilteredApp  = getFilteredTags(valueOfInputSearchTag, tabKey);
+                            // let tagListFilteredUst = getFilteredTags(valueOfInputSearchTag, tabKey);
+                            console.log(tabKey)
+
+                            if (tabKey === 'Ustensiles') {
+                                // console.log('OK UST');
+                                displayTagsUstensiles(tagListFiltered);
+                            } else if (tabKey === 'Appareils') {
+                                // console.log('OK APP');
+                                displayTagsAppareils(tagListFiltered);
+                            }else if (tabKey === 'Ingredients') {
+                                // console.log('OK ING');
+                                displayTagsIngredients(tagListFiltered);
+                            }
                     });
                 });
             });

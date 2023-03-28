@@ -178,36 +178,10 @@ function handleSelector() {
 
 export function handleTaglist(tagData) {
     console.log(tagData)
-    const selectApp = document.querySelector('#app-select');
-    const selectUst = document.querySelector('#ust-select');
-
-    
-    const listAppDOM = selectApp.children[1].children[0];
-    const listUstDOM = selectUst.children[1].children[0];
-    
-    
-    listAppDOM.innerHTML = '';
-    listUstDOM.innerHTML = '';
 
     displayTagsIngredients(tagData.Ingredients);
-    
-    // POUR CHAQUE tableaux de données
-        // VERRIFIE SI le tag est déjà présent dans la liste
-
-    tagData.Appareils.forEach( app => {
-        if (!selectedTags.some(function (tag) {
-            return app === tag.name && 'appareils' === tag.type;
-        })) {
-            listAppDOM.appendChild(new getTagList(app, 'appareils', orderedRecipes ))
-        }
-    });
-    tagData.Ustensiles.forEach( ust => {
-        if (!selectedTags.some(function (tag) {
-            return ust === tag.name && 'ustensils' === tag.type;
-        })) {
-            listUstDOM.appendChild(new getTagList(ust, 'ustensils', orderedRecipes))
-        }
-    });
+    displayTagsAppareils(tagData.Appareils);
+    displayTagsUstensiles(tagData.Ustensiles);
 };
 
 export function displayTagsIngredients(tagDataIng) {
@@ -221,6 +195,36 @@ export function displayTagsIngredients(tagDataIng) {
             return ing === tag.name && 'ingredients' === tag.type;
         })) {
             listIngDOM.appendChild(new getTagList(ing, 'ingredients', orderedRecipes))
+        }
+    });
+}
+
+export function displayTagsAppareils(tagDataApp) {
+    const selectApp = document.querySelector('#app-select');
+    const listAppDOM = selectApp.children[1].children[0];
+
+    listAppDOM.innerHTML = '';
+
+    tagDataApp.forEach( app => {
+        if (!selectedTags.some(function (tag) {
+            return app === tag.name && 'appareils' === tag.type;
+        })) {
+            listAppDOM.appendChild(new getTagList(app, 'appareils', orderedRecipes))
+        }
+    });
+}
+
+export function displayTagsUstensiles(tagDataApp) {
+    const selectUst = document.querySelector('#ust-select');
+    const listUstDOM = selectUst.children[1].children[0];
+
+    listUstDOM.innerHTML = '';
+
+    tagDataApp.forEach( app => {
+        if (!selectedTags.some(function (tag) {
+            return app === tag.name && 'ustensiles' === tag.type;
+        })) {
+            listUstDOM.appendChild(new getTagList(app, 'ustensiles', orderedRecipes))
         }
     });
 }
