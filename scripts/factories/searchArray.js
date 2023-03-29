@@ -5,7 +5,7 @@
  * @returns [filteredRecipes]
  */
 
-import { handleTaglist, tagDataFiltered, tagsDatas } from "../pages/main.js";
+import { tagDataFiltered } from "../pages/main.js";
 
 export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];

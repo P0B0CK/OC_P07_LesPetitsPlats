@@ -121,7 +121,7 @@ export function displayTags() {
             card.classList.add('color-ing');
         } else if (tag.type === 'appareils') {
             card.classList.add('color-app');
-        } else if (tag.type === 'ustensils') {
+        } else if (tag.type === 'ustensiles') {
             card.classList.add('color-ust');
         }
     });
