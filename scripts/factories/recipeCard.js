@@ -38,9 +38,4 @@ export function recipeCard(recipes) {
         }
         return datas;
     }
-
-    function createIngredientType() {
-        let tabIngredient = [];
-        ingredients.map( elt => tabIngredient.push(elt.ingredient));
-    }
 }

@@ -9,7 +9,7 @@ import { tagDataFiltered } from "../pages/main.js";
 
 export function getFilteredRecipes(value, recipes){
     let filteredRecipes = [];
-    // console.log('Recettes : ', recipes);
+
     if ( value.length > 2 ) {
         recipes.forEach( recipe => {
             
@@ -78,9 +78,6 @@ export function getFilteredRecipesByTags(tag, recipes){
 
 export function getFilteredTags(searchText, tabKey) {
 
-    // console.log(searchText); // saisie en recherche
-    // console.log(tabKey); // nom du sélecteur
-    // console.log(tagsDatas); // tableau d'objets contenant d'autre objets
     if (searchText == undefined) {
         return tagDataFiltered[tabKey]
     } else {

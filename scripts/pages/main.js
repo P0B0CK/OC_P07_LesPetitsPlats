@@ -14,9 +14,7 @@ import { getFilteredRecipes, getFilteredRecipesByTags, getFilteredTags } from ".
 
 const tagsSelectors = document.querySelector('.tag-selectors'); // compartiment des boutons de selections
 const tagsSelectedContainer = document.querySelector('.tags-selected-container'); // compartiment des cartes des tags
-
 const searchBar = document.querySelector('.searchbar'); // Barre de recherche principale
-const inputSearchTag = document.querySelectorAll('.btn-search'); // Barre de recherche secondaire prévue dans les sélecteurs
 
 
 /**
@@ -175,10 +173,7 @@ function handleSelector() {
 /**
  *  GERER & GENERER pour chaque TYPE de selecteur la liste Correspondante ::
 */
-
 export function handleTaglist(tagData) {
-    console.log(tagData)
-
     displayTagsIngredients(tagData.Ingredients);
     displayTagsAppareils(tagData.Appareils);
     displayTagsUstensiles(tagData.Ustensiles);
